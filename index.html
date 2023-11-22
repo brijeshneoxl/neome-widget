@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      content="width=device-width, initial-scale=1.0"
+      name="viewport"
+    />
+    <script
+      src="/src/main.test.tsx"
+      type="module"
+    ></script>
+    <script src="/dist/index.js"></script>
+    <script>
+      let remove = () =>
+      {
+      };
+
+      function loadWidget()
+      {
+        console.log("===embed", embed);
+        remove = floating({
+          id: "two",
+          showAs: "embed"
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="loadWidget()">index</button>
+    <button onclick="remove()">index2</button>
+    <div id="app"></div>
+    <div
+      id="two"
+      style="height: 600px;width: 500px"
+    ></div>
+  </body>
+</html>
