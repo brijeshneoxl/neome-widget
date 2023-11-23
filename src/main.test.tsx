@@ -1,4 +1,3 @@
-import {embed} from "@brijeshdobariya/widget";
 import {render} from "preact";
 import {useRef} from "preact/compat";
 import {useEffect} from "preact/compat";
@@ -10,17 +9,21 @@ function App()
 
   useEffect(() =>
   {
-    oneEmbedRef.current = embed({
-      id: "one",
-      showAs: "embed"
-    });
+    // oneEmbedRef.current = loadNeome({
+    //   id: "one",
+    //   showAs: "embed",
+    //   userEmailId:"brijesh@neoxl.com",
+    //   userPassword:"Brijesh@123",
+    //   filterEntId:"e-nux8M5a8YWymoZrPWqmBcOWGK",
+    //   showStudio:true,
+    // });
   }, []);
 
   return <>
     <button
       onClick={() =>
       {
-        oneEmbedRef.current();
+        // oneEmbedRef.current();
       }}
     >
       Click

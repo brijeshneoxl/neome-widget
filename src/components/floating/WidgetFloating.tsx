@@ -1,9 +1,11 @@
+import {JSX} from "preact";
 import {useRef} from "preact/compat";
 import {useEffect} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useState} from "preact/compat";
+import {CSSProperties} from "react";
 import {render} from "react";
-import {getPositionStyle} from "../../base/plus.ts";
+import {getPopUpPosition} from "../../base/plus.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
 import {neomeFrameContainerId} from "../../base/types.ts";
 import {IWidgetScriptConfig} from "../../base/types.ts";
@@ -32,20 +34,16 @@ function WidgetFloating(props: {
 {
   const config = props.config;
   const url = `${neomeFrameSrc}`;
+
   const [open, setOpen] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
   const [badgeCount, setBadgeCount] = useState<number>();
+  const [popupPosition, setPopupPosition] = useState<CSSProperties>();
+
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const widgetPosition = config?.floatingButtonPosition ?? "bottomRight";
-  const widgetWidth = config?.widgetWidth || "360px";
-  const widgetHeight = config?.widgetHeight || "600px";
-
-  const widgetMargin = getWidgetMargin(config);
-
-  const positionStyle = getPositionStyle(
-    widgetPosition,
-    widgetMargin.position1,
-    widgetMargin.position2);
+  const widgetWidth = config?.widgetWidth || 360;
+  const widgetHeight = config?.widgetHeight || 600;
 
   const onLoad = useCallback(() =>
   {
@@ -58,8 +56,18 @@ function WidgetFloating(props: {
           payload: config
         } as IGetMsgPayload, url);
       }
-    }, 500);
+    }, 10);
   }, [config]);
+
+  const onClick = useCallback((
+    open: boolean,
+    menuAnchor: JSX.TargetedMouseEvent<HTMLDivElement>
+  ) =>
+  {
+    setOpen(open);
+    const popupPosition = getPopUpPosition(widgetWidth, widgetHeight, menuAnchor);
+    setPopupPosition(popupPosition);
+  }, []);
 
   useEffect(() =>
   {
@@ -67,10 +75,16 @@ function WidgetFloating(props: {
     {
       if(!isConnected)
       {
-        iframeRef.current.contentWindow?.postMessage({
-          type: "init",
-          payload: config
-        }, url);
+        setTimeout(() =>
+        {
+          if(iframeRef.current)
+          {
+            iframeRef.current.contentWindow?.postMessage({
+              type: "init",
+              payload: config
+            }, url);
+          }
+        }, 10);
       }
     }
   }, [isConnected, iframeRef.current]);
@@ -109,7 +123,7 @@ function WidgetFloating(props: {
           display: open ? "unset" : "none",
           width: widgetWidth,
           height: widgetHeight,
-          ...positionStyle
+          ...popupPosition
         }}
       >
         {
@@ -129,7 +143,7 @@ function WidgetFloating(props: {
       <WidgetButton
         open={open}
         config={config}
-        onClick={setOpen}
+        onClick={onClick}
         maxCount={100}
         badgeCount={badgeCount}
         position={widgetPosition}
@@ -146,7 +160,7 @@ function CrossElement(props: {
     style={{
       position: "absolute",
       top: 0,
-      right: 0,
+      right: -1,
       color: "white",
       fontWeight: "bold",
       cursor: "pointer",
@@ -159,14 +173,4 @@ function CrossElement(props: {
   >
     <CrossSvg />
   </div>;
-}
-
-function getWidgetMargin(config?: IWidgetScriptConfig)
-{
-  const defaultPosition = config?.widgetMargin ?? 32;
-  const position1 = config?.onOpenHideWidgetButton ? defaultPosition : (defaultPosition + 60);
-  return {
-    position1: `${position1}px`,
-    position2: `${defaultPosition}px`
-  };
 }

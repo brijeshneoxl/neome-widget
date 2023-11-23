@@ -1,6 +1,7 @@
 import {IWidgetScriptConfig} from "./base/types.ts";
 import {embed} from "./components/embed/WidgetEmbed.tsx";
 import {floating} from "./components/floating/WidgetFloating";
+import "./style.css";
 
 function loadNeome(config: IWidgetScriptConfig)
 {
@@ -21,14 +22,7 @@ function loadNeome(config: IWidgetScriptConfig)
       const neomeWidget = document.getElementById(id);
       if(neomeWidget)
       {
-        if(config.showAs === "embed")
-        {
-          neomeWidget.innerHTML = "";
-        }
-        else if(config.showAs === "floating")
-        {
-          neomeWidget.remove();
-        }
+        neomeWidget.replaceChildren();
       }
     }
   };

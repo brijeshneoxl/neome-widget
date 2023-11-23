@@ -10,7 +10,10 @@
       src="/src/main.test.tsx"
       type="module"
     ></script>
-    <script src="/dist/index.js"></script>
+    <script
+      src="/src/index.tsx"
+      type="module"
+    ></script>
     <script>
       let remove = () =>
       {
@@ -18,13 +21,25 @@
 
       function loadWidget()
       {
-        console.log("===embed", embed);
-        remove = floating({
-          id: "two",
-          showAs: "embed"
+        remove = loadNeome({
+          id: "floating",
+          showAs: "floating",
+          // userEmailId: "brijesh@neoxl.com",
+          // userPassword: "Brijesh@123",
+          onOpenHideWidgetButton: true,
+          showStudio: true
         });
       }
     </script>
+
+    <style>
+      #floating
+      {
+        bottom: 32px;
+        position: fixed;
+        right: 32px;
+      }
+    </style>
   </head>
   <body>
     <button onclick="loadWidget()">index</button>
@@ -32,7 +47,11 @@
     <div id="app"></div>
     <div
       id="two"
-      style="height: 600px;width: 500px"
+      style="height: 600px;width: 1500px"
+    ></div>
+
+    <div
+      id="floating"
     ></div>
   </body>
 </html>

@@ -1,55 +1,99 @@
+import {JSX} from "preact";
 import {CSSProperties} from "preact/compat";
-import {EnumDefnPosition} from "./types.ts";
-import {neomeFrameSrc} from "./types.ts";
-import {IWidgetScriptConfig} from "./types.ts";
 
-export function getPath(config?: IWidgetScriptConfig)
+export function getPopUpPosition(
+  popupWidth: number,
+  popupHeight: number,
+  menuAnchor: JSX.TargetedMouseEvent<HTMLDivElement>
+)
 {
-  const filterEntIds = [];
-  if(config?.filterEntId)
+  const {pageX, pageY} = menuAnchor;
+  const {innerWidth, innerHeight} = window;
+
+  const position: CSSProperties = {};
+
+  const spaceLeft = innerWidth - pageX;
+  const spaceRight = pageX;
+  const spaceAbove = pageY;
+  const spaceBelow = innerHeight - pageY;
+
+  // Calculate position based on available space
+  if(spaceLeft >= popupWidth)
   {
-    filterEntIds.push(config.filterEntId);
+    const right = innerWidth - pageX;
+    if(right + popupWidth >= innerWidth)
+    {
+      position.right = innerWidth - pageX - popupWidth;
+    }
+    else
+    {
+      position.right = right;
+    }
   }
-  if(config?.allowPersonalChat)
+  else if(spaceRight >= popupWidth)
   {
-    filterEntIds.push("global");
+    position.left = pageX;
+    if(pageX + popupWidth >= innerWidth)
+    {
+      position.left = pageX - popupWidth;
+    }
   }
 
-  return `${neomeFrameSrc}${filterEntIds.length ? ("?entIds=" + filterEntIds.join(",")) : ""}`;
+  if(spaceBelow >= popupHeight)
+  {
+    position.top = pageY;
+    if(pageY + popupHeight >= innerHeight)
+    {
+      position.top = pageY - popupHeight;
+    }
+  }
+  else if(spaceAbove >= popupHeight)
+  {
+    const bottom = innerHeight - pageY;
+    if(bottom + popupHeight >= innerHeight)
+    {
+      position.bottom = bottom - popupHeight;
+    }
+    else
+    {
+      position.bottom = bottom;
+    }
+  }
+
+  // Default position if no suitable space found
+  if(Object.keys(position).length === 0)
+  {
+    position.bottom = innerHeight - pageY;
+    position.right = innerWidth - pageX;
+  }
+
+  setBoxShadow(position);
+
+  return position;
 }
 
-export function getPositionStyle(
-  buttonPosition?: EnumDefnPosition,
-  position1?: string,
-  position2?: string
-): CSSProperties
+function setBoxShadow(style: CSSProperties)
 {
-  switch(buttonPosition)
+  if(style.top)
   {
-    case "topLeft":
-      return {
-        top: position1,
-        left: position2,
-        boxShadow: "-5px -5px 10px -10px rgba(0, 0, 0, 0.3)"
-      };
-    case "topRight":
-      return {
-        top: position1,
-        right: position2,
-        boxShadow: "5px -5px 10px -10px rgba(0, 0, 0, 0.3)"
-      };
-    case "bottomLeft":
-      return {
-        bottom: position1,
-        left: position2,
-        boxShadow: "-5px 5px 10px -10px rgba(0, 0, 0, 0.3)"
-      };
-    case "bottomRight":
-    default:
-      return {
-        bottom: position1,
-        right: position2,
-        boxShadow: "5px 5px 10px -10px rgba(0, 0, 0, 0.3)"
-      };
+    if(style.left)
+    {
+      style.boxShadow = "-5px -5px 10px -10px rgba(0, 0, 0, 0.3)";
+    }
+    else if(style.right)
+    {
+      style.boxShadow = "5px -5px 10px -10px rgba(0, 0, 0, 0.3)";
+    }
+  }
+  else if(style.bottom)
+  {
+    if(style.left)
+    {
+      style.boxShadow = "-5px 5px 10px -10px rgba(0, 0, 0, 0.3)";
+    }
+    else if(style.right)
+    {
+      style.boxShadow = "5px 5px 10px -10px rgba(0, 0, 0, 0.3)";
+    }
   }
 }

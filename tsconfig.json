@@ -21,7 +21,6 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"], "exclude": ["node_modules"], "references": [{ "path": "./tsconfig.node.json" }]

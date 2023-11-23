@@ -10,6 +10,7 @@ import {IPostMsgResponse} from "../../base/types.ts";
 import {neomeFrameSrc} from "../../base/types.ts";
 import {IWidgetScriptConfig} from "../../base/types.ts";
 import {NeomePlaceHolder} from "../icons/NeomePlaceHolder.tsx";
+import Loader from "../raw/Loader.tsx";
 
 export function embed(config: IWidgetScriptConfig)
 {
@@ -52,7 +53,7 @@ function WidgetEmbed(props: {
           payload: config
         } as IGetMsgPayload, url);
       }
-    }, 500);
+    }, 10);
   }, [config]);
 
   useEffect(() =>
@@ -61,10 +62,16 @@ function WidgetEmbed(props: {
     {
       if(!isConnected)
       {
-        iframeRef.current.contentWindow?.postMessage({
-          type: "init",
-          payload: config
-        } as IGetMsgPayload, url);
+        setTimeout(() =>
+        {
+          if(iframeRef.current)
+          {
+            iframeRef.current.contentWindow?.postMessage({
+              type: "init",
+              payload: config
+            } as IGetMsgPayload, url);
+          }
+        }, 10);
       }
     }
   }, [isConnected, iframeRef.current]);
@@ -95,18 +102,24 @@ function WidgetEmbed(props: {
   }
 
   return (
-    <iframe
-      ref={iframeRef}
-      style={{
-        width: "100%",
-        height: "100%",
-        border: "1px solid #DCDCDCFF"
-      }}
-      onLoad={onLoad}
-      src={url}
-      referrerpolicy={"no-referrer"}
-      allow="camera; microphone; geolocation; fullscreen;"
-    />
+    <>
+      {
+        !isConnected ? <Loader /> : null
+      }
+      <iframe
+        ref={iframeRef}
+        style={{
+          display: !isConnected ? "none" : "unset",
+          width: "100%",
+          height: "100%",
+          border: "1px solid #DCDCDCFF"
+        }}
+        onLoad={onLoad}
+        src={url}
+        referrerpolicy={"no-referrer"}
+        allow="camera; microphone; geolocation; fullscreen;"
+      />
+    </>
   );
 }
 
