@@ -38,7 +38,6 @@ export function WidgetButton(props: {
         position: "relative",
         userSelect: "none",
         width: "48px",
-        zIndex: "999",
         ...props.open && {
           transform: "rotate(90deg)",
           transition: "all 0.2s ease-in-out"

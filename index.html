@@ -24,10 +24,15 @@
         remove = loadNeome({
           id: "floating",
           showAs: "floating",
-          // userEmailId: "brijesh@neoxl.com",
-          // userPassword: "Brijesh@123",
+          userEmailId: "brijesh@neoxl.com",
+          userPassword: "Brijesh@123",
           // onOpenHideWidgetButton: true,
           showStudio: true
+        });
+
+        loadNeome({
+          id: "floating2",
+          showAs: "floating"
         });
       }
     </script>
@@ -38,6 +43,13 @@
         bottom: 32px;
         left: 32px;
         position: fixed;
+      }
+
+      #floating2
+      {
+        bottom: 32px;
+        position: fixed;
+        right: 32px;
       }
     </style>
   </head>
@@ -52,6 +64,10 @@
 
     <div
       id="floating"
+    ></div>
+
+    <div
+      id="floating2"
     ></div>
   </body>
 </html>

@@ -55,7 +55,7 @@ function WidgetFloating(props: {
           payload: config
         } as IGetMsgPayload, url);
       }
-    }, 100);
+    }, 50);
   }, [config]);
 
   const onClick = useCallback((open: boolean, menuAnchor: HTMLDivElement) =>
@@ -80,7 +80,7 @@ function WidgetFloating(props: {
               payload: config
             }, url);
           }
-        }, 100);
+        }, 50);
       }
     }
   }, [isConnected, iframeRef.current]);

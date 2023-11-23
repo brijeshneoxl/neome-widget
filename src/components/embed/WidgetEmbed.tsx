@@ -53,7 +53,7 @@ function WidgetEmbed(props: {
           payload: config
         } as IGetMsgPayload, url);
       }
-    }, 10);
+    }, 50);
   }, [config]);
 
   useEffect(() =>
@@ -64,14 +64,14 @@ function WidgetEmbed(props: {
       {
         setTimeout(() =>
         {
-          if(iframeRef.current)
+          if(iframeRef.current && iframeRef.current)
           {
             iframeRef.current.contentWindow?.postMessage({
               type: "init",
               payload: config
             } as IGetMsgPayload, url);
           }
-        }, 10);
+        }, 50);
       }
     }
   }, [isConnected, iframeRef.current]);

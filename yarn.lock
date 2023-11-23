@@ -227,7 +227,7 @@
     to-fast-properties "^2.0.0"
 
 "@brijeshdobariya/widget@file:":
-  version "0.0.0"
+  version "0.0.3"
   resolved "file:"
   dependencies:
     "@brijeshdobariya/widget" "file:"

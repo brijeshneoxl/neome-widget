@@ -1,64 +1,70 @@
+import {loadNeome} from "@brijeshdobariya/widget";
 import {render} from "preact";
 import {useRef} from "preact/compat";
 import {useEffect} from "preact/compat";
 
 function App()
 {
-  const oneEmbedRef = useRef<() => void>(null);
-  const twoEmbedRef = useRef<() => void>(null);
+  const oneEmbedRef = useRef<(() => void) | null>(null);
+  const twoEmbedRef = useRef<(() => void) | null>(null);
 
   useEffect(() =>
   {
-    // oneEmbedRef.current = loadNeome({
-    //   id: "one",
-    //   showAs: "embed",
-    //   userEmailId:"brijesh@neoxl.com",
-    //   userPassword:"Brijesh@123",
-    //   filterEntId:"e-nux8M5a8YWymoZrPWqmBcOWGK",
-    //   showStudio:true,
-    // });
+    oneEmbedRef.current = loadNeome({
+      id: "first",
+      showAs: "embed",
+      userEmailId: "brijesh@neoxl.com",
+      userPassword: "Brijesh@123",
+      filterEntId: "e-nux8M5a8YWymoZrPWqmBcOWGK",
+      showStudio: true
+    });
+
+    twoEmbedRef.current = loadNeome({
+      id: "second",
+      showAs: "floating"
+    });
   }, []);
 
   return <>
     <button
       onClick={() =>
       {
-        // oneEmbedRef.current();
+        oneEmbedRef.current && oneEmbedRef.current();
       }}
     >
-      Click
+      embed
+    </button>
+
+    <button
+      onClick={() =>
+      {
+        twoEmbedRef.current && twoEmbedRef.current();
+      }}
+    >
+      floating
     </button>
     <One />
+    <Two />
   </>;
 }
 
 function One()
 {
   return <div
-    id={"one"}
+    id={"first"}
     style={{
       width: "500px",
       height: "600px",
       padding: "8px",
       background: "beige"
     }}
-  ></div>;
-
+  >
+  </div>;
 }
 
 function Two()
 {
-
-  return <div
-    id={"two"}
-    style={{
-      width: "500px",
-      height: "600px",
-      padding: "8px",
-      background: "red"
-    }}
-  ></div>;
-
+  return <div id={"second"}></div>;
 }
 
 render(<App />, document.getElementById("app")!);
