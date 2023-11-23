@@ -55,7 +55,7 @@ function WidgetEmbed(props: {
           payload: config
         } as IGetMsgPayload, url);
       }
-    }, 50);
+    }, 10);
   }, [config]);
 
   useEffect(() =>
@@ -73,7 +73,7 @@ function WidgetEmbed(props: {
               payload: config
             } as IGetMsgPayload, url);
           }
-        }, 50);
+        }, 10);
       }
     }
   }, [isConnected, iframeRef.current]);

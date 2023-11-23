@@ -22,6 +22,16 @@ export function floating(config: IWidgetScriptConfig)
     const neomeWidget = document.getElementById(id);
     if(neomeWidget)
     {
+      const style = document.createElement("style");
+      style.id = "neomeWidgetStyle";
+      style.innerHTML =
+        `@media only screen and (max-width:500px){#neomeFrameId{height:calc(100vh - 190px);width:calc(100vw - 20px)}}@keyframes opacity-animate{0%{opacity:0}100%{opacity:1}}`;
+      const isStyleExist = document.getElementById("neomeWidgetStyle");
+      if(!isStyleExist)
+      {
+        document.head.append(style);
+      }
+
       render(<WidgetFloating config={config} />, neomeWidget);
     }
   }
@@ -55,7 +65,7 @@ function WidgetFloating(props: {
           payload: config
         } as IGetMsgPayload, url);
       }
-    }, 50);
+    }, 10);
   }, [config]);
 
   const onClick = useCallback((open: boolean, menuAnchor: HTMLDivElement) =>
@@ -80,7 +90,7 @@ function WidgetFloating(props: {
               payload: config
             }, url);
           }
-        }, 50);
+        }, 10);
       }
     }
   }, [isConnected, iframeRef.current]);
