@@ -1,7 +1,6 @@
 import {useRef} from "preact/compat";
 import {IWidgetScriptConfig} from "../../base/types.ts";
 import {EnumDefnPosition} from "../../base/types.ts";
-import {neomeWidgetBtnId} from "../../base/types.ts";
 import {CloseSvg} from "../icons/CloseSvg.tsx";
 import {NeomeSvg} from "../icons/NeomeSvg.tsx";
 
@@ -30,9 +29,22 @@ export function WidgetButton(props: {
 
   return (
     <div
-      id={neomeWidgetBtnId}
+      style={{
+        border: "none",
+        borderRadius: "50%",
+        boxSizing: "border-box",
+        cursor: "pointer",
+        height: "48px",
+        position: "relative",
+        userSelect: "none",
+        width: "48px",
+        zIndex: "999",
+        ...props.open && {
+          transform: "rotate(90deg)",
+          transition: "all 0.2s ease-in-out"
+        }
+      }}
       ref={buttonRef}
-      className={`${props.open ? "rotate" : ""}`}
       onClick={() =>
       {
         if(buttonRef.current)
@@ -43,7 +55,30 @@ export function WidgetButton(props: {
     >
       {
         !disableBadgeCount && badgeCount && !props.open &&
-        <div className={"badgeCount"}>
+        <div
+          style={{
+            alignItems: "center",
+            background: "#b3261e",
+            borderRadius: "10px",
+            color: "white",
+            display: "flex",
+            flexWrap: "wrap",
+            fontFamily: "'.AppleSystemUIFont', 'Arial', 'serif'",
+            fontSize: "0.9em",
+            fontWeight: "500",
+            height: "20px",
+            justifyContent: "center",
+            lineHeight: "20px",
+            marginLeft: "4px",
+            minWidth: "20px",
+            padding: "0 4px",
+            position: "absolute",
+            right: "-4px",
+            textAlign: "center",
+            top: "-5px",
+            width: "fit-content"
+          }}
+        >
           {
             maxCount && maxCount <= badgeCount
               ? (maxCount - 1 + "+")

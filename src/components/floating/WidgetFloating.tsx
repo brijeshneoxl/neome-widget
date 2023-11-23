@@ -5,12 +5,12 @@ import {useState} from "preact/compat";
 import {CSSProperties} from "react";
 import {render} from "react";
 import {getPopUpPosition} from "../../base/plus.ts";
+import {neomeIFrameStyle} from "../../base/styles.ts";
+import {neomeIFrameContainerStyle} from "../../base/styles.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
-import {neomeFrameContainerId} from "../../base/types.ts";
 import {IWidgetScriptConfig} from "../../base/types.ts";
 import {IPostMsgResponse} from "../../base/types.ts";
 import {neomeFrameSrc} from "../../base/types.ts";
-import {neomeFrameId} from "../../base/types.ts";
 import {CrossSvg} from "../icons/Svgs.tsx";
 import {WidgetButton} from "./WidgetButton.tsx";
 
@@ -55,7 +55,7 @@ function WidgetFloating(props: {
           payload: config
         } as IGetMsgPayload, url);
       }
-    }, 10);
+    }, 100);
   }, [config]);
 
   const onClick = useCallback((open: boolean, menuAnchor: HTMLDivElement) =>
@@ -80,7 +80,7 @@ function WidgetFloating(props: {
               payload: config
             }, url);
           }
-        }, 10);
+        }, 100);
       }
     }
   }, [isConnected, iframeRef.current]);
@@ -114,12 +114,12 @@ function WidgetFloating(props: {
   return (
     <>
       <div
-        id={neomeFrameContainerId}
         style={{
+          ...neomeIFrameContainerStyle,
+          ...popupPosition,
           display: open ? "unset" : "none",
           width: widgetWidth,
-          height: widgetHeight,
-          ...popupPosition
+          height: widgetHeight
         }}
       >
         {
@@ -128,7 +128,7 @@ function WidgetFloating(props: {
         }
         <iframe
           ref={iframeRef}
-          id={neomeFrameId}
+          style={neomeIFrameStyle}
           onLoad={onLoad}
           src={url}
           referrerpolicy={"no-referrer"}
