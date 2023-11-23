@@ -8,13 +8,13 @@ export default defineConfig({
   build: {
     lib: {
       entry: [
-        resolve(__dirname, "src/index.tsx")
+        resolve(__dirname, "src/index.tsx"),
+        resolve(__dirname, "src/cdn.tsx")
       ],
       name: "index",
-      fileName: "index"
+      fileName: (format, entryName) => `${entryName}.js`,
+      formats: ["es"]
     }
   },
   plugins: [dts(), preact()]
 });
-
-

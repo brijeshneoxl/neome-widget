@@ -27,10 +27,4 @@ function loadNeome(config: IWidgetScriptConfig)
   };
 }
 
-if(window)
-{
-  // @ts-ignore
-  window.loadNeome = loadNeome;
-}
-
 export {loadNeome};
