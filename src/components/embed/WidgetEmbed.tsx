@@ -40,10 +40,12 @@ function WidgetEmbed(props: {
   const config = props.config;
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const url = `${neomeFrameSrc}`;
 
   const onLoad = useCallback(() =>
   {
+    setIsLoading(false);
     setTimeout(() =>
     {
       if(iframeRef.current)
@@ -104,12 +106,12 @@ function WidgetEmbed(props: {
   return (
     <>
       {
-        !isConnected ? <Loader /> : null
+        isLoading ? <Loader /> : null
       }
       <iframe
         ref={iframeRef}
         style={{
-          display: !isConnected ? "none" : "unset",
+          display: isLoading ? "none" : "unset",
           width: "100%",
           height: "100%",
           border: "1px solid #DCDCDCFF"

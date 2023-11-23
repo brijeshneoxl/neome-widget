@@ -27,10 +27,13 @@ function loadNeome(config: IWidgetScriptConfig)
   };
 }
 
-const style = document.createElement("style");
-style.innerHTML =
-  `@media only screen and (max-width:500px){#neomeFrameId{height:calc(100vh - 190px);width:calc(100vw - 20px)}}@keyframes opacity-animate{0%{opacity:0}100%{opacity:1}}`;
-document.head.append(style);
+if(document)
+{
+  const style = document.createElement("style");
+  style.innerHTML =
+    `@media only screen and (max-width:500px){#neomeFrameId{height:calc(100vh - 190px);width:calc(100vw - 20px)}}@keyframes opacity-animate{0%{opacity:0}100%{opacity:1}}`;
+  document.head.append(style);
+}
 
 if(window)
 {
