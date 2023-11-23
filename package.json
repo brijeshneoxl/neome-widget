@@ -1,8 +1,9 @@
 {
   "name": "@brijeshdobariya/widget",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "main": "./dist/index.umd.cjs",
+  "license": "MIT",
   "module": "./dist/index.js",
   "exports": {
     ".": {
