@@ -1,13 +1,14 @@
-import {JSX} from "preact";
 import {CSSProperties} from "preact/compat";
 
 export function getPopUpPosition(
   popupWidth: number,
   popupHeight: number,
-  menuAnchor: JSX.TargetedMouseEvent<HTMLDivElement>
+  menuAnchor: HTMLDivElement
 )
 {
-  const {pageX, pageY} = menuAnchor;
+  const rect = menuAnchor.getBoundingClientRect();
+  const pageX = +rect.left;
+  const pageY = +rect.top;
   const {innerWidth, innerHeight} = window;
 
   const position: CSSProperties = {};

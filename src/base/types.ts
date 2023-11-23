@@ -1,8 +1,7 @@
 export const neomeWidgetBtnId = "neomeWidgetBtnId";
 export const neomeFrameContainerId = "neomeFrameContainerId";
 export const neomeFrameId = "neomeFrameId";
-// export const neomeFrameSrc = "https://web.orgbeat.com";
-export const neomeFrameSrc = "http://localhost:3000";
+export const neomeFrameSrc = "https://web.orgbeat.com";
 
 export const minWidgetWidth = 280;
 export const minWidgetHeight = 400;

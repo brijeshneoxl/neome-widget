@@ -1,4 +1,4 @@
-import {JSX} from "preact";
+import {useRef} from "preact/compat";
 import {IWidgetScriptConfig} from "../../base/types.ts";
 import {EnumDefnPosition} from "../../base/types.ts";
 import {neomeWidgetBtnId} from "../../base/types.ts";
@@ -8,13 +8,14 @@ import {NeomeSvg} from "../icons/NeomeSvg.tsx";
 export function WidgetButton(props: {
   config?: IWidgetScriptConfig,
   open: boolean,
-  onClick: (open: boolean, menuAnchor: JSX.TargetedMouseEvent<HTMLDivElement>) => void,
+  onClick: (open: boolean, menuAnchor: HTMLDivElement) => void,
   position: EnumDefnPosition,
   badgeCount?: number,
   maxCount?: number
 })
 {
   const config = props.config;
+  const buttonRef = useRef<HTMLDivElement>(null);
   const onOpenHideWidgetButton = config?.onOpenHideWidgetButton;
 
   if(!((onOpenHideWidgetButton && !props.open) || (!onOpenHideWidgetButton)))
@@ -30,8 +31,15 @@ export function WidgetButton(props: {
   return (
     <div
       id={neomeWidgetBtnId}
+      ref={buttonRef}
       className={`${props.open ? "rotate" : ""}`}
-      onClick={(event) => props.onClick(!props.open, event)}
+      onClick={() =>
+      {
+        if(buttonRef.current)
+        {
+          props.onClick(!props.open, buttonRef.current);
+        }
+      }}
     >
       {
         !disableBadgeCount && badgeCount && !props.open &&

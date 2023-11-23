@@ -1,4 +1,3 @@
-import {JSX} from "preact";
 import {useRef} from "preact/compat";
 import {useEffect} from "preact/compat";
 import {useCallback} from "preact/compat";
@@ -59,10 +58,7 @@ function WidgetFloating(props: {
     }, 10);
   }, [config]);
 
-  const onClick = useCallback((
-    open: boolean,
-    menuAnchor: JSX.TargetedMouseEvent<HTMLDivElement>
-  ) =>
+  const onClick = useCallback((open: boolean, menuAnchor: HTMLDivElement) =>
   {
     setOpen(open);
     const popupPosition = getPopUpPosition(widgetWidth, widgetHeight, menuAnchor);
