@@ -7,7 +7,7 @@ export default function Loader()
         height: "100%",
         color: "rgba(0, 0, 0, 0.38)",
         display: "flex",
-        fontFamily: "inherit",
+        fontFamily: "'.AppleSystemUIFont', 'Arial', 'serif'",
         justifyContent: "center",
         alignItems: "center"
       }}

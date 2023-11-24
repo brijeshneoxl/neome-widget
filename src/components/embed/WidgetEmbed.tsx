@@ -3,12 +3,13 @@ import {useState} from "preact/compat";
 import {useEffect} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useRef} from "preact/compat";
-import {minWidgetHeight} from "../../base/types.ts";
-import {minWidgetWidth} from "../../base/types.ts";
+import {neomeFrameSrc} from "../../base/const.ts";
+import {minWidgetWidth} from "../../base/const.ts";
+import {minWidgetHeight} from "../../base/const.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
 import {IPostMsgResponse} from "../../base/types.ts";
-import {neomeFrameSrc} from "../../base/types.ts";
-import {IWidgetScriptConfig} from "../../base/types.ts";
+
+import {IWidgetScriptConfig} from "../../index.tsx";
 import {NeomePlaceHolder} from "../icons/NeomePlaceHolder.tsx";
 import Loader from "../raw/Loader.tsx";
 
@@ -33,7 +34,7 @@ export function embed(config: IWidgetScriptConfig)
 }
 
 function WidgetEmbed(props: {
-  config?: IWidgetScriptConfig,
+  config: IWidgetScriptConfig,
   showGif?: boolean
 })
 {
@@ -43,9 +44,8 @@ function WidgetEmbed(props: {
   const [isLoading, setIsLoading] = useState(true);
   const url = `${neomeFrameSrc}`;
 
-  const onLoad = useCallback(() =>
+  const initMsg = useCallback(() =>
   {
-    setIsLoading(false);
     setTimeout(() =>
     {
       if(iframeRef.current)
@@ -55,8 +55,14 @@ function WidgetEmbed(props: {
           payload: config
         } as IGetMsgPayload, url);
       }
-    }, 10);
-  }, [config]);
+    }, 100);
+  }, [config, url]);
+
+  const onLoad = useCallback(() =>
+  {
+    setIsLoading(false);
+    initMsg();
+  }, [config, initMsg]);
 
   useEffect(() =>
   {
@@ -64,16 +70,7 @@ function WidgetEmbed(props: {
     {
       if(!isConnected)
       {
-        setTimeout(() =>
-        {
-          if(iframeRef.current && iframeRef.current)
-          {
-            iframeRef.current.contentWindow?.postMessage({
-              type: "init",
-              payload: config
-            } as IGetMsgPayload, url);
-          }
-        }, 10);
+        initMsg();
       }
     }
   }, [isConnected, iframeRef.current]);
@@ -93,6 +90,8 @@ function WidgetEmbed(props: {
           case "disconnected":
             setIsConnected(false);
             break;
+          case "getConfig":
+            initMsg();
         }
       }
     };
@@ -124,4 +123,3 @@ function WidgetEmbed(props: {
     </>
   );
 }
-

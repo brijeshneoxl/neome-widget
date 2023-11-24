@@ -1,6 +1,5 @@
 import {useRef} from "preact/compat";
-import {IWidgetScriptConfig} from "../../base/types.ts";
-import {EnumDefnPosition} from "../../base/types.ts";
+import {IWidgetScriptConfig} from "../../index.tsx";
 import {CloseSvg} from "../icons/CloseSvg.tsx";
 import {NeomeSvg} from "../icons/NeomeSvg.tsx";
 
@@ -8,7 +7,6 @@ export function WidgetButton(props: {
   config?: IWidgetScriptConfig,
   open: boolean,
   onClick: (open: boolean, menuAnchor: HTMLDivElement) => void,
-  position: EnumDefnPosition,
   badgeCount?: number,
   maxCount?: number
 })

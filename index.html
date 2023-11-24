@@ -6,12 +6,14 @@
       content="width=device-width, initial-scale=1.0"
       name="viewport"
     />
+    <!--    <script-->
+    <!--      src="/src/main.test.tsx"-->
+    <!--      type="module"-->
+    <!--    ></script>-->
+
+    <!--      src="https://unpkg.com/@brijeshdobariya/widget@0.1.0/dist/cdn.js"-->
     <script
-      src="/src/main.test.tsx"
-      type="module"
-    ></script>
-    <script
-      src="/src/index.tsx"
+      src="/dist/cdn.js"
       type="module"
     ></script>
     <script>
@@ -23,16 +25,15 @@
       {
         remove = loadNeome({
           id: "floating",
-          showAs: "floating",
-          userEmailId: "brijesh@neoxl.com",
-          userPassword: "Brijesh@123",
-          // onOpenHideWidgetButton: true,
-          showStudio: true
+          showAs: "floating"
         });
 
         loadNeome({
-          id: "floating2",
-          showAs: "floating"
+          id: "two",
+          showAs: "embed",
+          userEmailId: "brijesh@neoxl.com",
+          userPassword: "Brijesh@123",
+          filterEntId: "e-nux8M5a8YWymoZrPWqmBcOWGK"
         });
       }
     </script>
@@ -40,34 +41,23 @@
     <style>
       #floating
       {
-        bottom: 32px;
-        left: 32px;
-        position: fixed;
-      }
-
-      #floating2
-      {
-        bottom: 32px;
         position: fixed;
         right: 32px;
+        top: 32px;
       }
     </style>
   </head>
   <body>
-    <button onclick="loadWidget()">index</button>
-    <button onclick="remove()">index2</button>
+    <button onclick="loadWidget()">Load</button>
+    <button onclick="remove()">Remove</button>
     <div id="app"></div>
     <div
       id="two"
-      style="height: 600px;width: 1500px"
+      style="height: 600px;width: 800px"
     ></div>
 
     <div
       id="floating"
-    ></div>
-
-    <div
-      id="floating2"
     ></div>
   </body>
 </html>

@@ -4,13 +4,15 @@ import {useCallback} from "preact/compat";
 import {useState} from "preact/compat";
 import {CSSProperties} from "react";
 import {render} from "react";
+import {defaultFloatingHeight} from "../../base/const.ts";
+import {defaultFloatingWidth} from "../../base/const.ts";
+import {neomeFrameSrc} from "../../base/const.ts";
 import {getPopUpPosition} from "../../base/plus.ts";
 import {neomeIFrameStyle} from "../../base/styles.ts";
 import {neomeIFrameContainerStyle} from "../../base/styles.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
-import {IWidgetScriptConfig} from "../../base/types.ts";
 import {IPostMsgResponse} from "../../base/types.ts";
-import {neomeFrameSrc} from "../../base/types.ts";
+import {IWidgetScriptConfig} from "../../index.tsx";
 import {CrossSvg} from "../icons/Svgs.tsx";
 import {WidgetButton} from "./WidgetButton.tsx";
 
@@ -38,7 +40,7 @@ export function floating(config: IWidgetScriptConfig)
 }
 
 function WidgetFloating(props: {
-  config?: IWidgetScriptConfig
+  config: IWidgetScriptConfig
 })
 {
   const config = props.config;
@@ -50,11 +52,10 @@ function WidgetFloating(props: {
   const [popupPosition, setPopupPosition] = useState<CSSProperties>();
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const widgetPosition = config?.floatingButtonPosition ?? "bottomRight";
-  const widgetWidth = config?.widgetWidth || 360;
-  const widgetHeight = config?.widgetHeight || 600;
+  const widgetWidth = config?.widgetWidth || defaultFloatingWidth;
+  const widgetHeight = config?.widgetHeight || defaultFloatingHeight;
 
-  const onLoad = useCallback(() =>
+  const initMsg = useCallback(() =>
   {
     setTimeout(() =>
     {
@@ -65,8 +66,13 @@ function WidgetFloating(props: {
           payload: config
         } as IGetMsgPayload, url);
       }
-    }, 10);
-  }, [config]);
+    }, 100);
+  }, [config, url]);
+
+  const onLoad = useCallback(() =>
+  {
+    initMsg();
+  }, [initMsg]);
 
   const onClick = useCallback((open: boolean, menuAnchor: HTMLDivElement) =>
   {
@@ -81,16 +87,7 @@ function WidgetFloating(props: {
     {
       if(!isConnected)
       {
-        setTimeout(() =>
-        {
-          if(iframeRef.current)
-          {
-            iframeRef.current.contentWindow?.postMessage({
-              type: "init",
-              payload: config
-            }, url);
-          }
-        }, 10);
+        initMsg();
       }
     }
   }, [isConnected, iframeRef.current]);
@@ -116,6 +113,8 @@ function WidgetFloating(props: {
           case "disconnected":
             setIsConnected(false);
             break;
+          case "getConfig":
+            initMsg();
         }
       }
     };
@@ -152,7 +151,6 @@ function WidgetFloating(props: {
         onClick={onClick}
         maxCount={100}
         badgeCount={badgeCount}
-        position={widgetPosition}
       />
     </>
   );
