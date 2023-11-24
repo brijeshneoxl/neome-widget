@@ -18,7 +18,7 @@ export interface IWidgetScriptConfig extends IWidgetButtonConfig
   id: string,
   showAs: TypeWidget;
   filterEntId?: string;
-  selectedGroupId?: string;
+  selectGroupId?: string;
   allowPersonalChat?: boolean;
   userEmailId?: string;
   userPassword?: string;

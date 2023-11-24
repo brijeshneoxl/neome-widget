@@ -6,14 +6,16 @@
       content="width=device-width, initial-scale=1.0"
       name="viewport"
     />
-    <!--    <script-->
-    <!--      src="/src/main.test.tsx"-->
-    <!--      type="module"-->
-    <!--    ></script>-->
+    <title>Building Widget</title>
+
+    <script
+      src="/src/main.test.tsx"
+      type="module"
+    ></script>
 
     <!--      src="https://unpkg.com/@brijeshdobariya/widget@0.1.0/dist/cdn.js"-->
     <script
-      src="/dist/cdn.js"
+      src="/src/cdn.tsx"
       type="module"
     ></script>
     <script>
@@ -33,31 +35,61 @@
           showAs: "embed",
           userEmailId: "brijesh@neoxl.com",
           userPassword: "Brijesh@123",
-          filterEntId: "e-nux8M5a8YWymoZrPWqmBcOWGK"
+          filterEntId: "e-nux8M5a8YWymoZrPWqmBcOWGK",
+          selectedGroupId: "g-9EcDmolqtOxs3mhvlo7nLWICQ"
         });
       }
     </script>
 
     <style>
+      *
+      {
+        font-family: ".AppleSystemUIFont"
+      }
+
       #floating
       {
         position: fixed;
         right: 32px;
         top: 32px;
       }
+
+      .clickBtn
+      {
+        margin-bottom: 16px;
+      }
     </style>
   </head>
   <body>
-    <button onclick="loadWidget()">Load</button>
-    <button onclick="remove()">Remove</button>
-    <div id="app"></div>
-    <div
-      id="two"
-      style="height: 600px;width: 800px"
-    ></div>
 
-    <div
-      id="floating"
-    ></div>
+    <div>
+      <h3>Using CDN</h3>
+      <button
+        class="clickBtn"
+        onclick="loadWidget()"
+      >Load
+      </button>
+      <button
+        class="clickBtn"
+        onclick="remove()"
+      >Remove
+      </button>
+      <div
+        id="two"
+        style="height: 600px;width: 800px"
+      ></div>
+
+      <div
+        id="floating"
+      >
+      </div>
+
+      <hr />
+
+      <div>
+        <h3>Using Package</h3>
+        <div id="app"></div>
+      </div>
+    </div>
   </body>
 </html>

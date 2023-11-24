@@ -27,6 +27,7 @@ function App()
 
   return <>
     <button
+      className={"clickBtn"}
       onClick={() =>
       {
         oneEmbedRef.current && oneEmbedRef.current();
@@ -36,6 +37,7 @@ function App()
     </button>
 
     <button
+      className={"clickBtn"}
       onClick={() =>
       {
         twoEmbedRef.current && twoEmbedRef.current();
