@@ -15,7 +15,14 @@ function App()
       showAs: "embed",
       filterEntId: "e-nux8M5a8YWymoZrPWqmBcOWGK",
       selectGroupId: "g-v2ya1OnmgJHmHNFQHdSWZl8er",
-      showStudio: true
+      demoFlag: false,
+      showStudio: true,
+      userCredentials: [
+        {
+          handle: "brijesh@neoxl.com",
+          password: "Brijesh@123"
+        }
+      ]
     });
 
     twoEmbedRef.current = loadNeome({
@@ -32,7 +39,7 @@ function App()
         oneEmbedRef.current && oneEmbedRef.current();
       }}
     >
-      embed
+      Remove embed
     </button>
 
     <button
@@ -42,7 +49,7 @@ function App()
         twoEmbedRef.current && twoEmbedRef.current();
       }}
     >
-      floating
+      Remove floating
     </button>
     <One />
     <Two />
@@ -65,7 +72,14 @@ function One()
 
 function Two()
 {
-  return <div id={"second"}></div>;
+  return <div
+    id={"second"}
+    style={{
+      position: "fixed",
+      top: "32px",
+      right: "32px"
+    }}
+  ></div>;
 }
 
 render(<App />, document.getElementById("app")!);

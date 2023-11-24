@@ -5,12 +5,12 @@ type TypeWidget = "floating" | "embed";
 
 export interface IWidgetFloatingConfig
 {
+  disableBadgeCount?: boolean;
   floatingButtonIconSrc?: string;
   onOpenHideWidgetButton?: boolean;
-  disableBadgeCount?: boolean;
-  widgetWidth?: number;
   widgetHeight?: number;
   widgetMargin?: number;
+  widgetWidth?: number;
 }
 
 export interface IWidgetCredential
@@ -21,16 +21,17 @@ export interface IWidgetCredential
 
 export interface IWidgetConfig extends IWidgetFloatingConfig
 {
-  id: string,
-  showAs: TypeWidget;
-  filterEntId?: string;
-  selectGroupId?: string;
   allowPersonalChat?: boolean;
-  userCredentials?: IWidgetCredential[];
+  demoFlag?: boolean
+  filterEntId?: string;
+  id: string,
+  selectGroupId?: string;
+  showAs: TypeWidget;
+  showProduction?: boolean;
   showStore?: boolean;
   showStudio?: boolean;
   showTerminal?: boolean;
-  showProduction?: boolean;
+  userCredentials?: IWidgetCredential[];
 }
 
 function loadNeome(config: IWidgetConfig)

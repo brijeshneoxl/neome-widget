@@ -3,13 +3,12 @@ import {CSSProperties} from "preact/compat";
 export function getPopUpPosition(
   popupWidth: number,
   popupHeight: number,
-  menuAnchor: HTMLDivElement,
-  margin?: number
+  menuAnchor: HTMLDivElement
 )
 {
   const rect = menuAnchor.getBoundingClientRect();
-  const pageX = +rect.left;
-  const pageY = +rect.top;
+  const pageX = +rect.right;
+  const pageY = +rect.bottom;
   const {innerWidth, innerHeight} = window;
 
   const position: CSSProperties = {};
@@ -31,6 +30,7 @@ export function getPopUpPosition(
     {
       position.right = right;
     }
+    position.right = +position.right + 24;
   }
   else if(spaceRight >= popupWidth)
   {
@@ -39,6 +39,7 @@ export function getPopUpPosition(
     {
       position.left = pageX - popupWidth;
     }
+    position.left = +position.left - 24;
   }
 
   if(spaceBelow >= popupHeight)
@@ -78,27 +79,31 @@ function setBoxShadow(style: CSSProperties)
 {
   if(style.top)
   {
-    style.top = +style.top + 16;
     if(style.left)
     {
-      style.boxShadow = "-5px -5px 10px -10px rgba(0, 0, 0, 0.3)";
+      style.top = +style.top + 16;
       style.left = +style.left + 24;
+      style.boxShadow = "-5px -5px 10px -10px rgba(0, 0, 0, 0.3)";
     }
     else if(style.right)
     {
+      style.top = +style.top + 16;
+      style.right = +style.right + 8;
       style.boxShadow = "5px -5px 10px -10px rgba(0, 0, 0, 0.3)";
     }
   }
   else if(style.bottom)
   {
-    style.bottom = +style.bottom + 16;
     if(style.left)
     {
-      style.left = +style.left + 42;
+      style.bottom = +style.bottom + 60;
+      style.left = +style.left + 24;
       style.boxShadow = "-5px 5px 10px -10px rgba(0, 0, 0, 0.3)";
     }
     else if(style.right)
     {
+      style.bottom = +style.bottom + 60;
+      style.right = +style.right + 12;
       style.boxShadow = "5px 5px 10px -10px rgba(0, 0, 0, 0.3)";
     }
   }
