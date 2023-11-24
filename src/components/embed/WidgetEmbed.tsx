@@ -9,11 +9,11 @@ import {minWidgetHeight} from "../../base/const.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
 import {IPostMsgResponse} from "../../base/types.ts";
 
-import {IWidgetScriptConfig} from "../../index.tsx";
+import {IWidgetConfig} from "../../index.tsx";
 import {NeomePlaceHolder} from "../icons/NeomePlaceHolder.tsx";
 import Loader from "../raw/Loader.tsx";
 
-export function embed(config: IWidgetScriptConfig)
+export function embed(config: IWidgetConfig)
 {
   const id = config.id;
   if(id)
@@ -34,7 +34,7 @@ export function embed(config: IWidgetScriptConfig)
 }
 
 function WidgetEmbed(props: {
-  config: IWidgetScriptConfig,
+  config: IWidgetConfig,
   showGif?: boolean
 })
 {

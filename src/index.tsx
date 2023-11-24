@@ -3,7 +3,7 @@ import {floating} from "./components/floating/WidgetFloating";
 
 type TypeWidget = "floating" | "embed";
 
-export interface IWidgetButtonConfig
+export interface IWidgetFloatingConfig
 {
   floatingButtonIconSrc?: string;
   onOpenHideWidgetButton?: boolean;
@@ -13,22 +13,27 @@ export interface IWidgetButtonConfig
   widgetMargin?: number;
 }
 
-export interface IWidgetScriptConfig extends IWidgetButtonConfig
+export interface IWidgetCredential
+{
+  handle: string;
+  password: string;
+}
+
+export interface IWidgetConfig extends IWidgetFloatingConfig
 {
   id: string,
   showAs: TypeWidget;
   filterEntId?: string;
   selectGroupId?: string;
   allowPersonalChat?: boolean;
-  userEmailId?: string;
-  userPassword?: string;
+  userCredentials?: IWidgetCredential[];
   showStore?: boolean;
   showStudio?: boolean;
   showTerminal?: boolean;
   showProduction?: boolean;
 }
 
-function loadNeome(config: IWidgetScriptConfig)
+function loadNeome(config: IWidgetConfig)
 {
   const id = config.id;
   if(config.showAs === "embed")

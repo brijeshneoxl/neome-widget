@@ -12,11 +12,11 @@ import {neomeIFrameStyle} from "../../base/styles.ts";
 import {neomeIFrameContainerStyle} from "../../base/styles.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
 import {IPostMsgResponse} from "../../base/types.ts";
-import {IWidgetScriptConfig} from "../../index.tsx";
+import {IWidgetConfig} from "../../index.tsx";
 import {CrossSvg} from "../icons/Svgs.tsx";
 import {WidgetButton} from "./WidgetButton.tsx";
 
-export function floating(config: IWidgetScriptConfig)
+export function floating(config: IWidgetConfig)
 {
   const id = config.id;
   if(id)
@@ -40,7 +40,7 @@ export function floating(config: IWidgetScriptConfig)
 }
 
 function WidgetFloating(props: {
-  config: IWidgetScriptConfig
+  config: IWidgetConfig
 })
 {
   const config = props.config;

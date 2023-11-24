@@ -13,9 +13,8 @@ function App()
     oneEmbedRef.current = loadNeome({
       id: "first",
       showAs: "embed",
-      userEmailId: "brijesh@neoxl.com",
-      userPassword: "Brijesh@123",
       filterEntId: "e-nux8M5a8YWymoZrPWqmBcOWGK",
+      selectGroupId: "g-v2ya1OnmgJHmHNFQHdSWZl8er",
       showStudio: true
     });
 
