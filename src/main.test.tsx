@@ -1,7 +1,7 @@
-import {loadNeome} from "@brijeshdobariya/widget";
 import {render} from "preact";
 import {useRef} from "preact/compat";
 import {useEffect} from "preact/compat";
+import {loadNeome} from "./index";
 
 function App()
 {
@@ -13,14 +13,14 @@ function App()
     oneEmbedRef.current = loadNeome({
       id: "first",
       showAs: "embed",
-      filterEntId: "e-nux8M5a8YWymoZrPWqmBcOWGK",
-      selectGroupId: "g-v2ya1OnmgJHmHNFQHdSWZl8er",
+      filterEntId: "e-N4NVnFrsiWNwiS3WdvTW3RR7c",
+      selectGroupId: "g-mPj7qsudWbaCxlgPdArn3lZ7Z",
       demoFlag: false,
       showStudio: true,
       userCredentials: [
         {
-          handle: "brijesh@neoxl.com",
-          password: "Brijesh@123"
+          handle: "akash@neoxl.com",
+          password: "Akash987"
         }
       ]
     });

@@ -4,9 +4,11 @@ import {useCallback} from "preact/compat";
 import {useState} from "preact/compat";
 import {CSSProperties} from "react";
 import {render} from "react";
+import {defaultPostMsgDelay} from "../../base/const.ts";
 import {defaultFloatingHeight} from "../../base/const.ts";
 import {defaultFloatingWidth} from "../../base/const.ts";
 import {neomeFrameSrc} from "../../base/const.ts";
+import {getUrl} from "../../base/plus.ts";
 import {getPopUpPosition} from "../../base/plus.ts";
 import {neomeIFrameStyle} from "../../base/styles.ts";
 import {neomeIFrameContainerStyle} from "../../base/styles.ts";
@@ -44,7 +46,7 @@ function WidgetFloating(props: {
 })
 {
   const config = props.config;
-  const url = `${neomeFrameSrc}`;
+  const url = getUrl(config.id);
 
   const [open, setOpen] = useState(false);
   const [isConnected, setIsConnected] = useState(false);
@@ -64,10 +66,10 @@ function WidgetFloating(props: {
         iframeRef.current.contentWindow?.postMessage({
           type: "init",
           payload: config
-        } as IGetMsgPayload, url);
+        } as IGetMsgPayload, neomeFrameSrc);
       }
-    }, 100);
-  }, [config, url]);
+    }, defaultPostMsgDelay);
+  }, [config]);
 
   const onLoad = useCallback(() =>
   {

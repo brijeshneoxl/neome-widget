@@ -1,4 +1,10 @@
 import {CSSProperties} from "preact/compat";
+import {neomeFrameSrc} from "./const.ts";
+
+export function getUrl(id: string)
+{
+  return `${neomeFrameSrc}?widgetId=${id}`;
+}
 
 export function getPopUpPosition(
   popupWidth: number,

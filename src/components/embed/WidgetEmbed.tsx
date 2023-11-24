@@ -3,9 +3,11 @@ import {useState} from "preact/compat";
 import {useEffect} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useRef} from "preact/compat";
+import {defaultPostMsgDelay} from "../../base/const.ts";
 import {neomeFrameSrc} from "../../base/const.ts";
 import {minWidgetWidth} from "../../base/const.ts";
 import {minWidgetHeight} from "../../base/const.ts";
+import {getUrl} from "../../base/plus.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
 import {IPostMsgResponse} from "../../base/types.ts";
 
@@ -42,7 +44,7 @@ function WidgetEmbed(props: {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const url = `${neomeFrameSrc}`;
+  const url = getUrl(config.id);
 
   const initMsg = useCallback(() =>
   {
@@ -53,10 +55,10 @@ function WidgetEmbed(props: {
         iframeRef.current.contentWindow?.postMessage({
           type: "init",
           payload: config
-        } as IGetMsgPayload, url);
+        } as IGetMsgPayload, neomeFrameSrc);
       }
-    }, 100);
-  }, [config, url]);
+    }, defaultPostMsgDelay);
+  }, [config]);
 
   const onLoad = useCallback(() =>
   {
@@ -79,7 +81,7 @@ function WidgetEmbed(props: {
   {
     window.onmessage = (event) =>
     {
-      if(event.origin === url)
+      if(event.origin === neomeFrameSrc)
       {
         const response = event.data as IPostMsgResponse;
         switch(response?.type)
