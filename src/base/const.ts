@@ -4,3 +4,4 @@ export const minWidgetHeight = 400;
 export const defaultFloatingWidth = 360;
 export const defaultFloatingHeight = 650;
 export const defaultPostMsgDelay = 70;
+export const retryDurationMs = 1000;

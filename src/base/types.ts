@@ -15,5 +15,5 @@ export interface IGetMsgPayload
 export interface IPostMsgResponse
 {
   type: IPostMsgType,
-  payload: number
+  payload: any
 }

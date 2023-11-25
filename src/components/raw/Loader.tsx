@@ -12,7 +12,7 @@ export default function Loader()
         alignItems: "center"
       }}
     >
-      Loading...
+      Loading neome...
     </div>
   );
 }

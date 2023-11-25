@@ -15,8 +15,8 @@ function App()
       showAs: "embed",
       filterEntId: "e-N4NVnFrsiWNwiS3WdvTW3RR7c",
       selectGroupId: "g-mPj7qsudWbaCxlgPdArn3lZ7Z",
-      demoFlag: false,
       showStudio: true,
+      allowPersonalChat: true,
       userCredentials: [
         {
           handle: "akash@neoxl.com",
@@ -27,7 +27,18 @@ function App()
 
     twoEmbedRef.current = loadNeome({
       id: "second",
-      showAs: "floating"
+      showAs: "embed",
+      allowPersonalChat: true,
+      filterEntId: "e-VtoZ838Pj6N2ug3Ol5hrgGIR3",
+      selectGroupId: "g-9EcDmolqtOxs3mhvlo7nLWICQ",
+      showStudio: true,
+      demoFlag: true,
+      userCredentials: [
+        {
+          handle: "brijesh@neoxl.com",
+          password: "Brijesh@123"
+        }
+      ]
     });
   }, []);
 
@@ -52,7 +63,7 @@ function App()
       Remove floating
     </button>
     <One />
-    <Two />
+    <One2 />
   </>;
 }
 
@@ -60,6 +71,20 @@ function One()
 {
   return <div
     id={"first"}
+    style={{
+      width: "500px",
+      height: "600px",
+      padding: "8px",
+      background: "beige"
+    }}
+  >
+  </div>;
+}
+
+function One2()
+{
+  return <div
+    id={"second"}
     style={{
       width: "500px",
       height: "600px",

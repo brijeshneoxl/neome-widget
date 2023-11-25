@@ -1,9 +1,17 @@
 import {CSSProperties} from "preact/compat";
+import {useState} from "react";
+import {useRef} from "react";
+import {useEffect} from "react";
+import {IWidgetConfig} from "../index.tsx";
+import {retryDurationMs} from "./const.ts";
 import {neomeFrameSrc} from "./const.ts";
+import {IPostMsgResponse} from "./types.ts";
 
-export function getUrl(id: string)
+export function getUrl(config: IWidgetConfig)
 {
-  return `${neomeFrameSrc}?widgetId=${id}`;
+  const id = config.id;
+  const forceSignIn = Boolean(config.userCredentials?.length);
+  return `${neomeFrameSrc}?widgetId=${id}${forceSignIn ? "&forceSignIn=" + forceSignIn : ""}`;
 }
 
 export function getPopUpPosition(
@@ -113,4 +121,78 @@ function setBoxShadow(style: CSSProperties)
       style.boxShadow = "5px 5px 10px -10px rgba(0, 0, 0, 0.3)";
     }
   }
+}
+
+interface INeomeRef
+{
+  initMsg: () => void;
+  setBadgeCount?: (badgeCount: number) => void;
+}
+
+export function useRetry(config: IWidgetConfig, neomeRef: INeomeRef)
+{
+  const [isConnected, setIsConnected] = useState(false);
+  const timeOutId = useRef<NodeJS.Timeout>();
+
+  useEffect(() =>
+  {
+    if(!isConnected)
+    {
+      timeOutId.current = setInterval(() =>
+      {
+        neomeRef.initMsg();
+      }, retryDurationMs);
+    }
+    else if(timeOutId.current)
+    {
+      clearInterval(timeOutId.current);
+    }
+
+    return () =>
+    {
+      if(timeOutId.current)
+      {
+        clearInterval(timeOutId.current);
+      }
+    };
+  }, [isConnected]);
+
+  useEffect(() =>
+  {
+    let listener = (event: MessageEvent<IPostMsgResponse>) =>
+    {
+      if(event.origin === neomeFrameSrc)
+      {
+        const response = event.data;
+        switch(response?.type)
+        {
+          case "connected":
+            if(config.id === response.payload)
+            {
+              setIsConnected(true);
+            }
+            break;
+          case "disconnected":
+            setIsConnected(false);
+            break;
+          case "badge":
+            if(response.payload && neomeRef.setBadgeCount)
+            {
+              neomeRef.setBadgeCount(response.payload);
+            }
+            break;
+          case "getConfig":
+            neomeRef.initMsg();
+        }
+      }
+    };
+    window.addEventListener("message", listener);
+
+    return () =>
+    {
+      window.removeEventListener("message", listener);
+    };
+  }, []);
+
+  return isConnected;
 }

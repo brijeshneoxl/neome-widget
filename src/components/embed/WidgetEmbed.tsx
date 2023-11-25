@@ -1,15 +1,14 @@
 import {render} from "preact/compat";
 import {useState} from "preact/compat";
-import {useEffect} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useRef} from "preact/compat";
 import {defaultPostMsgDelay} from "../../base/const.ts";
 import {neomeFrameSrc} from "../../base/const.ts";
 import {minWidgetWidth} from "../../base/const.ts";
 import {minWidgetHeight} from "../../base/const.ts";
+import {useRetry} from "../../base/plus.ts";
 import {getUrl} from "../../base/plus.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
-import {IPostMsgResponse} from "../../base/types.ts";
 
 import {IWidgetConfig} from "../../index.tsx";
 import {NeomePlaceHolder} from "../icons/NeomePlaceHolder.tsx";
@@ -42,9 +41,8 @@ function WidgetEmbed(props: {
 {
   const config = props.config;
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const url = getUrl(config.id);
+  const url = getUrl(config);
 
   const initMsg = useCallback(() =>
   {
@@ -66,38 +64,7 @@ function WidgetEmbed(props: {
     initMsg();
   }, [config, initMsg]);
 
-  useEffect(() =>
-  {
-    if(iframeRef.current)
-    {
-      if(!isConnected)
-      {
-        initMsg();
-      }
-    }
-  }, [isConnected, iframeRef.current]);
-
-  useEffect(() =>
-  {
-    window.onmessage = (event) =>
-    {
-      if(event.origin === neomeFrameSrc)
-      {
-        const response = event.data as IPostMsgResponse;
-        switch(response?.type)
-        {
-          case "connected":
-            setIsConnected(true);
-            break;
-          case "disconnected":
-            setIsConnected(false);
-            break;
-          case "getConfig":
-            initMsg();
-        }
-      }
-    };
-  }, []);
+  useRetry(config, {initMsg: initMsg});
 
   if(props.showGif)
   {

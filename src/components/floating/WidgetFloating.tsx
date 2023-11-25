@@ -1,5 +1,4 @@
 import {useRef} from "preact/compat";
-import {useEffect} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useState} from "preact/compat";
 import {CSSProperties} from "react";
@@ -8,12 +7,12 @@ import {defaultPostMsgDelay} from "../../base/const.ts";
 import {defaultFloatingHeight} from "../../base/const.ts";
 import {defaultFloatingWidth} from "../../base/const.ts";
 import {neomeFrameSrc} from "../../base/const.ts";
+import {useRetry} from "../../base/plus.ts";
 import {getUrl} from "../../base/plus.ts";
 import {getPopUpPosition} from "../../base/plus.ts";
 import {neomeIFrameStyle} from "../../base/styles.ts";
 import {neomeIFrameContainerStyle} from "../../base/styles.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
-import {IPostMsgResponse} from "../../base/types.ts";
 import {IWidgetConfig} from "../../index.tsx";
 import {CrossSvg} from "../icons/Svgs.tsx";
 import {WidgetButton} from "./WidgetButton.tsx";
@@ -46,10 +45,9 @@ function WidgetFloating(props: {
 })
 {
   const config = props.config;
-  const url = getUrl(config.id);
+  const url = getUrl(config);
 
   const [open, setOpen] = useState(false);
-  const [isConnected, setIsConnected] = useState(false);
   const [badgeCount, setBadgeCount] = useState<number>();
   const [popupPosition, setPopupPosition] = useState<CSSProperties>();
 
@@ -83,44 +81,12 @@ function WidgetFloating(props: {
     setPopupPosition(popupPosition);
   }, []);
 
-  useEffect(() =>
-  {
-    if(iframeRef.current)
+  useRetry(
+    config,
     {
-      if(!isConnected)
-      {
-        initMsg();
-      }
-    }
-  }, [isConnected, iframeRef.current]);
-
-  useEffect(() =>
-  {
-    window.onmessage = (event) =>
-    {
-      if(event.origin === neomeFrameSrc)
-      {
-        const response = event.data as IPostMsgResponse;
-        switch(response?.type)
-        {
-          case "connected":
-            setIsConnected(true);
-            break;
-          case "badge":
-            if(response.payload)
-            {
-              setBadgeCount(response.payload);
-            }
-            break;
-          case "disconnected":
-            setIsConnected(false);
-            break;
-          case "getConfig":
-            initMsg();
-        }
-      }
-    };
-  }, []);
+      initMsg: initMsg,
+      setBadgeCount: setBadgeCount
+    });
 
   return (
     <>
