@@ -1,10 +1,10 @@
 import {useRef} from "preact/compat";
-import {IWidgetConfig} from "../../index.tsx";
+import {NeomeWidgetFloating} from "../../index.tsx";
 import {CloseSvg} from "../icons/CloseSvg.tsx";
 import {NeomeSvg} from "../icons/NeomeSvg.tsx";
 
 export function WidgetButton(props: {
-  config?: IWidgetConfig,
+  config?: NeomeWidgetFloating,
   open: boolean,
   onClick: (open: boolean, menuAnchor: HTMLDivElement) => void,
   badgeCount?: number,

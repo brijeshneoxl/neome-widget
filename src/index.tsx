@@ -1,62 +1,40 @@
 import {embed} from "./components/embed/WidgetEmbed.tsx";
 import {floating} from "./components/floating/WidgetFloating";
 
-type TypeWidget = "floating" | "embed";
-
-export interface IWidgetFloatingConfig
-{
-  disableBadgeCount?: boolean;
-  floatingButtonIconSrc?: string;
-  onOpenHideWidgetButton?: boolean;
-  widgetHeight?: number;
-  widgetMargin?: number;
-  widgetWidth?: number;
-}
-
 export interface IWidgetCredential
 {
   handle: string;
   password: string;
 }
 
-export interface IWidgetConfig extends IWidgetFloatingConfig
+export interface NeomeWidget
 {
   allowPersonalChat?: boolean;
   demoFlag?: boolean
   filterEntId?: string;
   id: string,
   selectGroupId?: string;
-  showAs: TypeWidget;
   showProduction?: boolean;
   showStore?: boolean;
   showStudio?: boolean;
   showTerminal?: boolean;
-  userCredentials?: IWidgetCredential[];
+  userCredentials?: IWidgetCredential[]
 }
 
-function loadNeome(config: IWidgetConfig)
+export interface NeomeWidgetEmbed extends NeomeWidget
 {
-  const id = config.id;
-  if(config.showAs === "embed")
-  {
-    embed(config);
-  }
-  else if(config.showAs === "floating")
-  {
-    floating(config);
-  }
-
-  return () =>
-  {
-    if(id)
-    {
-      const neomeWidget = document.getElementById(id);
-      if(neomeWidget)
-      {
-        neomeWidget.replaceChildren();
-      }
-    }
-  };
 }
 
-export {loadNeome};
+export interface NeomeWidgetFloating extends NeomeWidget
+{
+  disableBadgeCount?: boolean;
+  floatingButtonIconSrc?: string;
+  onOpenHideWidgetButton?: boolean;
+  widgetHeight?: number;
+  widgetWidth?: number;
+}
+
+export {
+  embed,
+  floating
+};

@@ -1,7 +1,7 @@
-import {loadNeome} from "./";
+import {embed as embedNeome} from "./components/embed/WidgetEmbed.tsx";
+import {floating as floatingNeome} from "./components/floating/WidgetFloating.tsx";
 
-if(typeof window !== "undefined")
-{
-  // @ts-ignore
-  window.loadNeome = loadNeome;
-}
+const embed = embedNeome;
+const floating = floatingNeome;
+
+export {embed, floating};

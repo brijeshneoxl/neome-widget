@@ -13,11 +13,11 @@ import {getPopUpPosition} from "../../base/plus.ts";
 import {neomeIFrameStyle} from "../../base/styles.ts";
 import {neomeIFrameContainerStyle} from "../../base/styles.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
-import {IWidgetConfig} from "../../index.tsx";
+import {NeomeWidgetFloating} from "../../index.tsx";
 import {CrossSvg} from "../icons/Svgs.tsx";
 import {WidgetButton} from "./WidgetButton.tsx";
 
-export function floating(config: IWidgetConfig)
+export function floating(config: NeomeWidgetFloating)
 {
   const id = config.id;
   if(id)
@@ -35,13 +35,25 @@ export function floating(config: IWidgetConfig)
         document.head.append(style);
       }
 
-      render(<WidgetFloating config={config} />, neomeWidget);
+      render(<WidgetFloating
+        config={config}
+        key={Math.random()}
+      />, neomeWidget);
     }
   }
+
+  return () =>
+  {
+    const neomeWidget = document.getElementById(id);
+    if(neomeWidget)
+    {
+      neomeWidget.replaceChildren();
+    }
+  };
 }
 
 function WidgetFloating(props: {
-  config: IWidgetConfig
+  config: NeomeWidgetFloating
 })
 {
   const config = props.config;
@@ -81,12 +93,10 @@ function WidgetFloating(props: {
     setPopupPosition(popupPosition);
   }, []);
 
-  useRetry(
-    config,
-    {
-      initMsg: initMsg,
-      setBadgeCount: setBadgeCount
-    });
+  useRetry(config.id, {
+    initMsg: initMsg,
+    setBadgeCount: setBadgeCount
+  });
 
   return (
     <>

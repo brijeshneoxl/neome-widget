@@ -9,12 +9,11 @@ import {minWidgetHeight} from "../../base/const.ts";
 import {useRetry} from "../../base/plus.ts";
 import {getUrl} from "../../base/plus.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
-
-import {IWidgetConfig} from "../../index.tsx";
+import {NeomeWidgetEmbed} from "../../index.tsx";
 import {NeomePlaceHolder} from "../icons/NeomePlaceHolder.tsx";
 import Loader from "../raw/Loader.tsx";
 
-export function embed(config: IWidgetConfig)
+export function embed(config: NeomeWidgetEmbed)
 {
   const id = config.id;
   if(id)
@@ -29,13 +28,23 @@ export function embed(config: IWidgetConfig)
       render(<WidgetEmbed
         config={config}
         showGif={showGif}
+        key={Math.random()}
       />, neomeWidget);
     }
   }
+
+  return () =>
+  {
+    const neomeWidget = document.getElementById(id);
+    if(neomeWidget)
+    {
+      neomeWidget.replaceChildren();
+    }
+  };
 }
 
 function WidgetEmbed(props: {
-  config: IWidgetConfig,
+  config: NeomeWidgetEmbed,
   showGif?: boolean
 })
 {
@@ -64,7 +73,9 @@ function WidgetEmbed(props: {
     initMsg();
   }, [config, initMsg]);
 
-  useRetry(config, {initMsg: initMsg});
+  useRetry(config.id, {
+    initMsg: initMsg
+  });
 
   if(props.showGif)
   {

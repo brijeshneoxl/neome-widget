@@ -2,12 +2,12 @@ import {CSSProperties} from "preact/compat";
 import {useState} from "react";
 import {useRef} from "react";
 import {useEffect} from "react";
-import {IWidgetConfig} from "../index.tsx";
+import {NeomeWidget} from "../index.tsx";
 import {retryDurationMs} from "./const.ts";
 import {neomeFrameSrc} from "./const.ts";
 import {IPostMsgResponse} from "./types.ts";
 
-export function getUrl(config: IWidgetConfig)
+export function getUrl(config: NeomeWidget)
 {
   const id = config.id;
   const forceSignIn = Boolean(config.userCredentials?.length);
@@ -129,7 +129,7 @@ interface INeomeRef
   setBadgeCount?: (badgeCount: number) => void;
 }
 
-export function useRetry(config: IWidgetConfig, neomeRef: INeomeRef)
+export function useRetry(widgetId: string, neomeRef: INeomeRef)
 {
   const [isConnected, setIsConnected] = useState(false);
   const timeOutId = useRef<NodeJS.Timeout>();
@@ -167,7 +167,7 @@ export function useRetry(config: IWidgetConfig, neomeRef: INeomeRef)
         switch(response?.type)
         {
           case "connected":
-            if(config.id === response.payload)
+            if(widgetId === response.payload)
             {
               setIsConnected(true);
             }
@@ -186,6 +186,7 @@ export function useRetry(config: IWidgetConfig, neomeRef: INeomeRef)
         }
       }
     };
+    
     window.addEventListener("message", listener);
 
     return () =>

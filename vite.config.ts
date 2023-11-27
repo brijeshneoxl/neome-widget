@@ -12,8 +12,22 @@ export default defineConfig({
         resolve(__dirname, "src/cdn.tsx")
       ],
       name: "index",
-      fileName: (format, entryName) => `${entryName}.js`,
-      formats: ["es"]
+      fileName: (format, entryName) =>
+      {
+        if(format === "es")
+        {
+          return `${entryName}.js`;
+        }
+        else if(format === "cjs")
+        {
+          return `${entryName}.${format}`;
+        }
+        else
+        {
+          return entryName;
+        }
+      },
+      formats: ["es", "cjs"]
     }
   },
   plugins: [dts(), preact()]
