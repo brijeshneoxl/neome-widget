@@ -186,7 +186,7 @@ export function useRetry(widgetId: string, neomeRef: INeomeRef)
         }
       }
     };
-    
+
     window.addEventListener("message", listener);
 
     return () =>
@@ -196,4 +196,23 @@ export function useRetry(widgetId: string, neomeRef: INeomeRef)
   }, []);
 
   return isConnected;
+}
+
+export function useCheckIsMobile()
+{
+  const [value, setValue] = useState(window.innerWidth);
+
+  useEffect(() =>
+  {
+    const handleResize = () => setValue(window.innerWidth);
+
+    window.addEventListener("resize", handleResize);
+
+    return () =>
+    {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return value > 280 && value < 680;
 }

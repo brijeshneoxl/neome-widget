@@ -1,3 +1,4 @@
+import {embedDeeplink} from "./components/deeplink/EmbedDeeplink.tsx";
 import {embed} from "./components/embed/WidgetEmbed.tsx";
 import {floating} from "./components/floating/WidgetFloating";
 
@@ -36,5 +37,6 @@ export interface NeomeWidgetFloating extends NeomeWidget
 
 export {
   embed,
-  floating
+  floating,
+  embedDeeplink
 };

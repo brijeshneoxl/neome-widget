@@ -1,7 +1,11 @@
-import {embed as embedNeome} from "./components/embed/WidgetEmbed.tsx";
-import {floating as floatingNeome} from "./components/floating/WidgetFloating.tsx";
+import {embed, embedDeeplink, floating} from "./";
 
-const embed = embedNeome;
-const floating = floatingNeome;
-
-export {embed, floating};
+if(window)
+{
+  // @ts-ignore
+  window.embed = embed;
+  // @ts-ignore
+  window.floating = floating;
+  // @ts-ignore
+  window.embedDeeplink = embedDeeplink;
+}

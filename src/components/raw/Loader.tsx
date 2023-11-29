@@ -8,6 +8,7 @@ export default function Loader()
         color: "rgba(0, 0, 0, 0.38)",
         display: "flex",
         fontFamily: "'.AppleSystemUIFont', 'Arial', 'serif'",
+        fontSize: "16px",
         justifyContent: "center",
         alignItems: "center"
       }}

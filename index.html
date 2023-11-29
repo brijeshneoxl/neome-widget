@@ -14,35 +14,18 @@
     ></script>
 
     <!--      src="https://unpkg.com/@brijeshdobariya/widget@0.1.0/dist/cdn.js"-->
-    <script
-      src="/src/cdn.tsx"
-      type="module"
-    ></script>
-    <script>
-      let remove = () =>
-      {
-      };
-
-      function loadWidget()
-      {
-        remove = loadNeome({
-          id: "floating",
-          showAs: "floating"
-        });
-
-        loadNeome({
-          id: "two",
-          showAs: "embed",
-          filterEntId: "e-nux8M5a8YWymoZrPWqmBcOWGK",
-          selectGroupId: "g-v2ya1OnmgJHmHNFQHdSWZl8er"
-        });
-      }
-    </script>
+    <script src="./dist/cdn.js"></script>
 
     <style>
       *
       {
         font-family: ".AppleSystemUIFont"
+      }
+
+      body
+      {
+        height: 100vh;
+        width: 100vw;
       }
 
       #floating
@@ -57,10 +40,19 @@
         margin-bottom: 16px;
       }
     </style>
+    <script type="text/javascript">
+      let remove = () =>
+      {
+      };
+
+      let loadWidget = () =>
+      {
+        Neome.print();
+      };
+    </script>
   </head>
   <body>
-
-    <div>
+    <div style="width: 100%">
       <h3>Using CDN</h3>
       <button
         class="clickBtn"
@@ -73,8 +65,8 @@
       >Remove
       </button>
       <div
-        id="two"
-        style="height: 600px;width: 800px"
+        id="embed"
+        style="height: 600px;width: 100%"
       ></div>
 
       <div
@@ -84,9 +76,12 @@
 
       <hr />
 
-      <div>
+      <div style="width: 100%">
         <h3>Using Package</h3>
-        <div id="app"></div>
+        <div
+          id="app"
+          style="width: 100%"
+        ></div>
       </div>
     </div>
   </body>

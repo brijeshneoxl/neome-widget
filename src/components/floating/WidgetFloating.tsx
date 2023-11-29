@@ -3,10 +3,12 @@ import {useCallback} from "preact/compat";
 import {useState} from "preact/compat";
 import {CSSProperties} from "react";
 import {render} from "react";
+import {iframePermission} from "../../base/const.ts";
 import {defaultPostMsgDelay} from "../../base/const.ts";
 import {defaultFloatingHeight} from "../../base/const.ts";
 import {defaultFloatingWidth} from "../../base/const.ts";
 import {neomeFrameSrc} from "../../base/const.ts";
+import {useCheckIsMobile} from "../../base/plus.ts";
 import {useRetry} from "../../base/plus.ts";
 import {getUrl} from "../../base/plus.ts";
 import {getPopUpPosition} from "../../base/plus.ts";
@@ -63,6 +65,8 @@ function WidgetFloating(props: {
   const [badgeCount, setBadgeCount] = useState<number>();
   const [popupPosition, setPopupPosition] = useState<CSSProperties>();
 
+  const isMobile = useCheckIsMobile();
+
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const widgetWidth = config?.widgetWidth || defaultFloatingWidth;
   const widgetHeight = config?.widgetHeight || defaultFloatingHeight;
@@ -105,13 +109,21 @@ function WidgetFloating(props: {
           ...neomeIFrameContainerStyle,
           ...popupPosition,
           display: open ? "unset" : "none",
-          width: widgetWidth,
-          height: widgetHeight
+          width: isMobile ? "calc(100% - 20px)" : widgetWidth,
+          height: isMobile ? "calc(100% - 40px)" : widgetHeight,
+          ...isMobile && {
+            top: 10,
+            bottom: 10,
+            right: 10,
+            left: 10
+          }
         }}
       >
         {
-          config?.onOpenHideWidgetButton &&
-          <CrossElement onClick={() => setOpen(false)} />
+          (config?.onOpenHideWidgetButton || isMobile) &&
+          <CrossElement
+            onClick={() => setOpen(false)}
+          />
         }
         <iframe
           ref={iframeRef}
@@ -119,7 +131,7 @@ function WidgetFloating(props: {
           onLoad={onLoad}
           src={url}
           referrerpolicy={"no-referrer"}
-          allow="camera; microphone; geolocation; fullscreen;"
+          allow={iframePermission}
         />
       </div>
 
@@ -149,7 +161,8 @@ function CrossElement(props: {
       userSelect: "none",
       background: "#b3261e",
       borderTopRightRadius: "8px",
-      borderBottomLeftRadius: "12px"
+      borderBottomLeftRadius: "12px",
+      zIndex: 999
     }}
     onClick={props.onClick}
   >
