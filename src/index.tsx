@@ -1,5 +1,5 @@
-import {embedDeeplink} from "./components/deeplink/EmbedDeeplink.tsx";
-import {embed} from "./components/embed/WidgetEmbed.tsx";
+import {embedDeeplink} from "./components/deeplink/EmbedDeeplink";
+import {embed} from "./components/embed/WidgetEmbed";
 import {floating} from "./components/floating/WidgetFloating";
 
 export interface IWidgetCredential
@@ -8,18 +8,22 @@ export interface IWidgetCredential
   password: string;
 }
 
-export interface NeomeWidget
+interface IWidget
+{
+  id: string;
+}
+
+export interface NeomeWidget extends IWidget
 {
   allowPersonalChat?: boolean;
-  demoFlag?: boolean
+  demoFlag?: boolean;
   filterEntId?: string;
-  id: string,
   selectGroupId?: string;
   showProduction?: boolean;
   showStore?: boolean;
   showStudio?: boolean;
   showTerminal?: boolean;
-  userCredentials?: IWidgetCredential[]
+  userCredentials?: IWidgetCredential[];
 }
 
 export interface NeomeWidgetEmbed extends NeomeWidget
@@ -33,6 +37,11 @@ export interface NeomeWidgetFloating extends NeomeWidget
   onOpenHideWidgetButton?: boolean;
   widgetHeight?: number;
   widgetWidth?: number;
+}
+
+export interface NeomeWidgetDeeplink extends IWidget
+{
+  src: string;
 }
 
 export {

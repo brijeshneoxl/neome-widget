@@ -2,6 +2,7 @@ import {CSSProperties} from "preact/compat";
 import {useState} from "react";
 import {useRef} from "react";
 import {useEffect} from "react";
+import {NeomeWidgetDeeplink} from "../index.tsx";
 import {NeomeWidget} from "../index.tsx";
 import {retryDurationMs} from "./const.ts";
 import {neomeFrameSrc} from "./const.ts";
@@ -12,6 +13,13 @@ export function getUrl(config: NeomeWidget)
   const id = config.id;
   const forceSignIn = Boolean(config.userCredentials?.length);
   return `${neomeFrameSrc}?widgetId=${id}${forceSignIn ? "&forceSignIn=" + forceSignIn : ""}`;
+}
+
+export function getDeeplinkUrl(config: NeomeWidgetDeeplink)
+{
+  const id = config.id;
+  const src = config.src;
+  return `${src}?widgetId=${id}`;
 }
 
 export function getPopUpPosition(

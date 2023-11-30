@@ -2,17 +2,21 @@ import {render} from "preact/compat";
 import {useState} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {iframePermission} from "../../base/const.ts";
+import {getDeeplinkUrl} from "../../base/plus.ts";
+import {NeomeWidgetDeeplink} from "../../index.tsx";
 import Loader from "../raw/Loader.tsx";
 
-export function embedDeeplink(id: string, src: string)
+export function embedDeeplink(config: NeomeWidgetDeeplink)
 {
-  if(id)
+  const id = config.id;
+  const src = config.src;
+  if(id && src)
   {
     const element = document.getElementById(id);
     if(element)
     {
       render(<EmbedDeeplink
-        src={src}
+        config={config}
         key={Math.random()}
       />, element);
     }
@@ -29,10 +33,13 @@ export function embedDeeplink(id: string, src: string)
 }
 
 function EmbedDeeplink(props: {
-  src: string
+  config: NeomeWidgetDeeplink
 })
 {
+  const config = props.config;
+  const url = getDeeplinkUrl(config);
   const [isLoading, setIsLoading] = useState(true);
+  
   const onLoad = useCallback(() =>
   {
     setIsLoading(false);
@@ -51,7 +58,7 @@ function EmbedDeeplink(props: {
           border: "1px solid #DCDCDCFF"
         }}
         onLoad={onLoad}
-        src={props.src}
+        src={url}
         referrerpolicy={"no-referrer"}
         allow={iframePermission}
       />

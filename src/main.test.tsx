@@ -2,6 +2,7 @@ import {render} from "preact";
 import {useCallback} from "preact/compat";
 import {useRef} from "preact/compat";
 import {useEffect} from "preact/compat";
+import {NeomeWidgetDeeplink} from "./index";
 import {floating} from "./index";
 import {embedDeeplink} from "./index";
 import {NeomeWidgetFloating} from "./index";
@@ -55,18 +56,25 @@ function App()
 
     <div style={{display: "flex", justifyContent: "center", padding: "50px"}}>
       <LoadDeeplink
-        id={"deeplink1"}
-        src={"https://web.orgbeat.com/dl/gh-LKCBQg9fCEbSnZTYaPOIL24r6"}
+        config={{
+          id: "deeplink1",
+          src: "https://web.orgbeat.com/dl/gh-BVaYnl17uLJ9MhQUgSlk7SVOC"
+        }}
       />
+
       <LoadDeeplink
-        id={"deeplink2"}
-        src={"https://web.orgbeat.com/dl/gh-vktO6XoNl79ff6J43o0lUOyXI"}
+        config={{
+          id: "deeplink2",
+          src: "https://web.orgbeat.com/dl/gh-tINh7zO8dr93QCWyVzZLrWJ6R"
+        }}
       />
     </div>
 
     <LoadDeeplink
-      id={"deeplink3"}
-      src={"https://web.orgbeat.com/dl/gh-MpWeerSTXSqnSH7Or0xXoMlkf"}
+      config={{
+        id: "deeplink3",
+        src: "https://web.orgbeat.com/dl/gh-Usa4Zc8GQhT9SKNvOgLmkx58X"
+      }}
     />
 
     <SimpleDiv />
@@ -125,17 +133,16 @@ function LoadEmbed(props: {
 }
 
 function LoadDeeplink(props: {
-  id: string,
-  src: string
+  config: NeomeWidgetDeeplink
 })
 {
-  const {id, src} = props;
+  const config = props.config;
   const deeplinkRef = useRef<(() => void) | null>(null);
 
   const load = useCallback(() =>
   {
-    deeplinkRef.current = embedDeeplink(id, src);
-  }, [props]);
+    deeplinkRef.current = embedDeeplink(config);
+  }, [config]);
 
   const remove = useCallback(() =>
   {
@@ -148,7 +155,7 @@ function LoadDeeplink(props: {
   return (
     <div style={{width: "100%"}}>
       <div
-        id={id}
+        id={config.id}
         style={{
           height: "600px",
           borderRadius: "8px",
