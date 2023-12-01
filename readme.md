@@ -1,20 +1,12 @@
 <p align="center">
-    <img src="https://web.orgbeat.com/android-chrome-512x512.png" width="256" height="256"> 
+    <img src="https://web.orgbeat.com/android-chrome-512x512.png" width="256" height="256" alt="neome"> 
 </p>
 
-[//]: # (<p align="center">)
-
-[//]: # (<a href="https://travis-ci.org/faisalman/ua-parser-js"><img src="https://travis-ci.org/faisalman/ua-parser-js.svg?branch=master"></a>)
-
-[//]: # (<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/v/ua-parser-js.svg"></a>)
-
-[//]: # (<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/dw/ua-parser-js.svg"></a>)
-
-[//]: # (<a href="https://www.jsdelivr.com/package/npm/ua-parser-js"><img src="https://data.jsdelivr.com/v1/package/npm/ua-parser-js/badge"></a>)
-
-[//]: # (<a href="https://cdnjs.com/libraries/UAParser.js"><img src="https://img.shields.io/cdnjs/v/UAParser.js.svg"></a>)
-
-[//]: # (</p>)
+<p align="center">
+<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/v/@brijeshdobariya/widget.svg" alt="version"></a>
+<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/dw/@brijeshdobariya/widget.svg" alt="downloads"></a>
+<a href="https://www.jsdelivr.com/package/npm/ua-parser-js"><img src="https://data.jsdelivr.com/v1/package/npm/@brijeshdobariya/widget/badge" alt="cdn downloads"></a>
+</p>
 
 # Neome Widget
 
@@ -24,7 +16,7 @@ Neome is a conversational automation platform built for enterprises of any size,
 
 Neome widget is javascript library which helps you to integrate neome app in your project.
 
-* Demo      : https://www.orgbeat.com
+* Demo      : https://www.orgbeat.com/docs/task-list/try-it
 
 ***
 
@@ -32,18 +24,16 @@ Neome widget is javascript library which helps you to integrate neome app in you
 
 ## Types
 
-* `NeomeWidget`
-* `NeomeWidgetEmbed extends NeomeWidget`
-* `NeomeWidgetFloating extends NeomeWidget`
+* `NeomeWidgetEmbed`
+* `NeomeWidgetFloating`
 * `NeomeWidgetDeeplink`
-* `IWidgetCredential`
 
 ## Methods
 
-The methods are self explanatory, here's a small overview on all the available methods:
+The methods are self-explanatory, here's a small overview on all the available methods:
 
 * `embed(config:NeomeWidgetEmbed): () => void`
-    * embed neome in element and return callback which removes the app from
+    * embed neome app in element and return callback which removes the app from
       element.
 
 
@@ -52,41 +42,55 @@ The methods are self explanatory, here's a small overview on all the available m
       the app from element.
 
 
-* `emebdDeeplink(config:NeomeWidgetDeeplink): () => void`
+* `embedDeeplink(config:NeomeWidgetDeeplink): () => void`
     * embed neome deeplink in element and return callback which removes
       the deeplink from element.
 
 ## Config NeomeWidget
 
-| Name              | Value                 | Description                                                                                                         |
-|-------------------|-----------------------|---------------------------------------------------------------------------------------------------------------------|
-| allowPersonalChat | `boolean`             | Filter all enterprise groups in app and only allows personal chat like local groups and normal chats .              |
-| demoFlag          | `boolean`             | Demo flag prevents editing in app.                                                                                  |
-| filterEntId       | `string`              | Filter specific enterprise in app.                                                                                  |
-| id (required)     | `string`              | (Required) `id` is a id of widget, it must be same of element `id` in which you want to `embed` or `float` the app. |
-| selectGroupId     | `string`              | Preselect group in as the app opens.                                                                                |
-| showProduction    | `boolean`             | Allow to view production in app.                                                                                    |
-| showStore         | `boolean`             | Allow to view store in app.                                                                                         |
-| showStudio        | `boolean`             | Allow to view studio in app.                                                                                        |
-| showTerminal      | `boolean`             | Allow to view terminal in app.                                                                                      |
-| userCredentials   | `IWidgetCredential[]` | Array of `IWidgetCredential`, it will select random credentials and will auto sign in in the app                    |
+This is main config which is super class of NeomeWidgetEmbed and NeomeWidgetFloating.
+
+NeomeWidgetEmbed has same config as NeomeWidget.
+
+| Name              | Value                 | Description                                                                                               |
+|-------------------|-----------------------|-----------------------------------------------------------------------------------------------------------|
+| id (required)     | `string`              | `id` is an id of widget, it must be same of element `id` in which you want to `embed` or `float` the app. |
+| allowPersonalChat | `boolean`             | Filter all enterprise groups in app and only allows personal chat like local groups and normal chats .    |
+| demoFlag          | `boolean`             | Demo flag prevents editing in app.                                                                        |
+| filterEntId       | `string`              | Filter specific enterprise in app.                                                                        |
+| selectGroupId     | `string`              | Preselect group in as the app opens.                                                                      |
+| showProduction    | `boolean`             | Allow to view production in app.                                                                          |
+| showStore         | `boolean`             | Allow to view store in app.                                                                               |
+| showStudio        | `boolean`             | Allow to view studio in app.                                                                              |
+| showTerminal      | `boolean`             | Allow to view terminal in app.                                                                            |
+| userCredentials   | `IWidgetCredential[]` | Array of `IWidgetCredential`, it will select random credentials and will auto sign in in the app          |
 
 ## Config NeomeWidgetFloating
 
-| Name                  | Value     | Description                                      |
-|-----------------------|-----------|--------------------------------------------------|
-| disableBadgeCount     | `boolean` | Disable badge count number in floating button    |
-| floatingButtonIconSrc | `string`  | Choose any image as an icon for floating button. |
-| widgetHeight          | `number`  | Height of widget popup (default 650).            |
-| widgetWidth           | `number`  | Width of widget popup (default 350).             |
+| Name                  | Value     | Description                                                                                               |
+|-----------------------|-----------|-----------------------------------------------------------------------------------------------------------|
+| id (required)         | `string`  | `id` is an id of widget, it must be same of element `id` in which you want to `embed` or `float` the app. |
+| disableBadgeCount     | `boolean` | Disable badge count number in floating button                                                             |
+| floatingButtonIconSrc | `string`  | Choose any image as an icon for floating button.                                                          |
+| widgetHeight          | `number`  | Height of widget popup (default 650).                                                                     |
+| widgetWidth           | `number`  | Width of widget popup (default 350).                                                                      |
 
 ## Config NeomeWidgetDeeplink
 
-| Name           | Value    | Description                                                                                                        |
-|----------------|----------|--------------------------------------------------------------------------------------------------------------------|
-| src (required) | `string` | `src` of deeplink you want to embed, it must be same of element <br> `id` in which you want to embed the deeplink. |
+| Name           | Value    | Description                                                                                                   |
+|----------------|----------|---------------------------------------------------------------------------------------------------------------|
+| id (required)  | `string` | `id` is an id of widget, it must be same of element `id` in which you want to `embed` or `float` the app.     |
+| src (required) | `string` | `src` of deeplink you want to embed, it must be same of element `id` in which you want to embed the deeplink. |
 
-## Using package
+## Installation
+
+There are two ways of installing :
+
+(1) Using package
+
+(2) Using CDN
+
+## (1) Using package
 
 `yarn add @brijeshdobariya/widget`
 
@@ -106,7 +110,11 @@ function EmbedNeome()
   useEffect(() =>
   {
     const remove = embed({
-      id: id
+      id: id,
+      allowPersonalChat: true,
+      showTerminal: true,
+      selectGroupId: "groupId",
+      filterEntId: "entId"
     } as NeomeWidgetEmbed)
 
     return () =>
@@ -139,7 +147,7 @@ function EmbedNeome()
 ### Floating neome in element
 
 ```tsx
-import {floating, NeomeWidgetFloating} from "@brijeshdobariya/widget";
+import {floating, NeomeWidgetFloating, IWidgetCredential} from "@brijeshdobariya/widget";
 import {useEffect} from "react";
 
 function FloatingNeome()
@@ -148,7 +156,17 @@ function FloatingNeome()
   useEffect(() =>
   {
     const remove = floating({
-      id: id
+      id: id,
+      showStudio: true,
+      disableBadgeCount: true,
+      widgetWidth: 400,
+      widgetHeight: 700,
+      userCredentials: [
+        {
+          handle: "anyhandle@email.com",
+          password: "password"
+        }
+      ] as IWidgetCredential[]
     } as NeomeWidgetFloating)
 
     return () =>
@@ -222,12 +240,18 @@ function EmebdDeeplink()
 */ 
 ```
 
-## Using CDN
+## (2) Using CDN
+
+Add `https://cdn.jsdelivr.net/npm/@brijeshdobariya/widget/dist/cdn.js` in script tag, and you can use all the methods in
+your project.
 
 ```html
 <!doctype html>
-<html>
+<html lang="en">
   <head>
+    <title>Using CDN</title>
+
+    <!-- Add CDN script  -->
     <script
       src="https://cdn.jsdelivr.net/npm/@brijeshdobariya/widget/dist/cdn.js"
       type="module"
@@ -236,9 +260,13 @@ function EmebdDeeplink()
 
     <script type="module">
 
-      <!--      Here you can use embed, floating and embedDeeplink function -->
+      <!-- Here you can use embed, floating and embedDeeplink function -->
       embed({
-        id: "neomeEmbed"
+        id: "neomeEmbed",
+        allowPersonalChat: true,
+        showTerminal: true,
+        selectGroupId: "groupId",
+        filterEntId: "entId"
       });
     </script>
   </head>
