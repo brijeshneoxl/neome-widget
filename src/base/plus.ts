@@ -4,22 +4,34 @@ import {useRef} from "react";
 import {useEffect} from "react";
 import {NeomeWidgetDeeplink} from "../index.tsx";
 import {NeomeWidget} from "../index.tsx";
+import {widgetId} from "./const.ts";
 import {retryDurationMs} from "./const.ts";
-import {neomeFrameSrc} from "./const.ts";
 import {IPostMsgResponse} from "./types.ts";
 
-export function getUrl(config: NeomeWidget)
+export function getWidgetSrc(config: NeomeWidget)
 {
   const id = config.id;
+  const hostUrl = config.hostUrl;
+
+  const urlObj = new URL(hostUrl);
+  urlObj.searchParams.set(widgetId, id);
+
   const forceSignIn = Boolean(config.userCredentials?.length);
-  return `${neomeFrameSrc}?widgetId=${id}${forceSignIn ? "&forceSignIn=" + forceSignIn : ""}`;
+  if(forceSignIn)
+  {
+    urlObj.searchParams.set("forceSignIn", "true");
+  }
+
+  return urlObj.toString();
 }
 
-export function getDeeplinkUrl(config: NeomeWidgetDeeplink)
+export function getDeeplinkSrc(config: NeomeWidgetDeeplink)
 {
   const id = config.id;
-  const src = config.src;
-  return `${src}?widgetId=${id}`;
+  const hostUrl = config.hostUrl;
+  const urlObj = new URL(hostUrl);
+  urlObj.searchParams.set(widgetId, id);
+  return urlObj.toString();
 }
 
 export function getPopUpPosition(
@@ -137,10 +149,11 @@ interface INeomeRef
   setBadgeCount?: (badgeCount: number) => void;
 }
 
-export function useRetry(widgetId: string, neomeRef: INeomeRef)
+export function useRetry(widgetId: string, src: string, neomeRef: INeomeRef)
 {
   const [isConnected, setIsConnected] = useState(false);
   const timeOutId = useRef<NodeJS.Timeout>();
+  const origin = getSrcOrigin(src);
 
   useEffect(() =>
   {
@@ -169,7 +182,7 @@ export function useRetry(widgetId: string, neomeRef: INeomeRef)
   {
     let listener = (event: MessageEvent<IPostMsgResponse>) =>
     {
-      if(event.origin === neomeFrameSrc)
+      if(event.origin === origin)
       {
         const response = event.data;
         switch(response?.type)
@@ -223,4 +236,10 @@ export function useCheckIsMobile()
   }, []);
 
   return value > 280 && value < 680;
+}
+
+export function getSrcOrigin(src: string)
+{
+  const urlObj = new URL(src);
+  return urlObj.origin;
 }

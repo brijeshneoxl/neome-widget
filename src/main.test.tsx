@@ -18,36 +18,67 @@ function App()
     <SimpleDiv />
     <SimpleDiv />
     <div style={{display: "flex", justifyContent: "space-evenly", padding: "50px", flexWrap: "wrap"}}>
+      {/*<LoadEmbed*/}
+      {/*  config={{*/}
+      {/*    id: "first",*/}
+      {/*    hostUrl: "https://web.neome.ai",*/}
+      {/*    showStudio: true*/}
+      {/*    // userCredentials: [*/}
+      {/*    //   {*/}
+      {/*    //     handle: "akash@neoxl.com",*/}
+      {/*    //     password: "Akash987"*/}
+      {/*    //   }*/}
+      {/*    // ]*/}
+      {/*  }}*/}
+      {/*/>*/}
+
       <LoadEmbed
         config={{
           id: "first",
+          hostUrl: "https://web.neome.ai",
           showStudio: true,
-          showTerminal: true,
           userCredentials: [
             {
-              handle: "akash@neoxl.com",
-              password: "Akash987"
-            }
-          ]
-        }}
-      />
-      <LoadEmbed
-        config={{
-          id: "second",
-          filterEntId: "e-0b1hiotFKBW8qsCS3tzhyRhZf",
-          allowPersonalChat: true,
-          selectGroupId: "g-zmI4Fa6QYtHIBIWrCyUifWhBt",
-          showStudio: true,
-          demoFlag: true,
-          userCredentials: [
-            {
-              handle: "brijesh@neoxl.com",
+              handle: "brijesh@neomenta.com",
               password: "Brijesh@123"
             }
           ]
         }}
       />
+
+      <LoadEmbed
+        config={{
+          id: "second",
+          hostUrl: "https://web.neome.ai",
+          showStudio: true,
+          userCredentials: [
+            {
+              handle: "brijesh+1@neomenta.com",
+              password: "Brijesh@123"
+            }
+          ]
+        }}
+      />
+
+      {/*<LoadEmbed*/}
+      {/*  config={{*/}
+      {/*    id: "second",*/}
+      {/*    hostUrl: "https://web.orgbeat.com",*/}
+      {/*    filterEntId: "e-0b1hiotFKBW8qsCS3tzhyRhZf",*/}
+      {/*    allowPersonalChat: true,*/}
+      {/*    selectGroupId: "g-zmI4Fa6QYtHIBIWrCyUifWhBt",*/}
+      {/*    showStudio: true,*/}
+      {/*    demoFlag: true,*/}
+      {/*    userCredentials: [*/}
+      {/*      {*/}
+      {/*        handle: "brijesh@neoxl.com",*/}
+      {/*        password: "Brijesh@123"*/}
+      {/*      }*/}
+      {/*    ]*/}
+      {/*  }}*/}
+      {/*/>*/}
     </div>
+    
     <SimpleDiv />
     <SimpleDiv />
     <SimpleDiv />
@@ -58,14 +89,14 @@ function App()
       <LoadDeeplink
         config={{
           id: "deeplink1",
-          src: "https://web.orgbeat.com/dl/gh-BVaYnl17uLJ9MhQUgSlk7SVOC"
+          hostUrl: "https://web.orgbeat.com/dl/gh-BVaYnl17uLJ9MhQUgSlk7SVOC"
         }}
       />
 
       <LoadDeeplink
         config={{
           id: "deeplink2",
-          src: "https://web.orgbeat.com/dl/gh-tINh7zO8dr93QCWyVzZLrWJ6R"
+          hostUrl: "https://web.orgbeat.com/dl/gh-tINh7zO8dr93QCWyVzZLrWJ6R"
         }}
       />
     </div>
@@ -73,7 +104,7 @@ function App()
     <LoadDeeplink
       config={{
         id: "deeplink3",
-        src: "https://web.orgbeat.com/dl/gh-Usa4Zc8GQhT9SKNvOgLmkx58X"
+        hostUrl: "https://web.orgbeat.com/dl/gh-Usa4Zc8GQhT9SKNvOgLmkx58X"
       }}
     />
 
@@ -84,7 +115,8 @@ function App()
     <SimpleDiv />
     <LoadFloating
       config={{
-        id: "third"
+        id: "third",
+        hostUrl: "https://web.orgbeat.com"
       }}
     />
   </>;
@@ -114,7 +146,7 @@ function LoadEmbed(props: {
       <div
         id={props.config.id}
         style={{
-          minWidth: "300px",
+          minWidth: "340px",
           maxWidth: "360px",
           height: "600px",
           borderRadius: "8px",

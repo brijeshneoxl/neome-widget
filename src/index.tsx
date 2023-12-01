@@ -11,6 +11,7 @@ export interface IWidgetCredential
 interface IWidget
 {
   id: string;
+  hostUrl: string;
 }
 
 export interface NeomeWidget extends IWidget
@@ -41,7 +42,6 @@ export interface NeomeWidgetFloating extends NeomeWidget
 
 export interface NeomeWidgetDeeplink extends IWidget
 {
-  src: string;
 }
 
 export {

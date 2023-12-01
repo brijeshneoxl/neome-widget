@@ -4,11 +4,11 @@ import {useCallback} from "preact/compat";
 import {useRef} from "preact/compat";
 import {iframePermission} from "../../base/const.ts";
 import {defaultPostMsgDelay} from "../../base/const.ts";
-import {neomeFrameSrc} from "../../base/const.ts";
 import {minWidgetWidth} from "../../base/const.ts";
 import {minWidgetHeight} from "../../base/const.ts";
+import {getSrcOrigin} from "../../base/plus.ts";
 import {useRetry} from "../../base/plus.ts";
-import {getUrl} from "../../base/plus.ts";
+import {getWidgetSrc} from "../../base/plus.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
 import {NeomeWidgetEmbed} from "../../index.tsx";
 import {NeomePlaceHolder} from "../icons/NeomePlaceHolder.tsx";
@@ -17,7 +17,8 @@ import Loader from "../raw/Loader.tsx";
 export function embed(config: NeomeWidgetEmbed)
 {
   const id = config.id;
-  if(id)
+  const hostUrl = config.hostUrl;
+  if(id && hostUrl)
   {
     const neomeWidget = document.getElementById(id);
     if(neomeWidget)
@@ -52,10 +53,11 @@ function WidgetEmbed(props: {
   const config = props.config;
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const url = getUrl(config);
+  const src = getWidgetSrc(config);
 
   const initMsg = useCallback(() =>
   {
+    const origin = getSrcOrigin(config.hostUrl);
     setTimeout(() =>
     {
       if(iframeRef.current)
@@ -63,7 +65,7 @@ function WidgetEmbed(props: {
         iframeRef.current.contentWindow?.postMessage({
           type: "init",
           payload: config
-        } as IGetMsgPayload, neomeFrameSrc);
+        } as IGetMsgPayload, origin);
       }
     }, defaultPostMsgDelay);
   }, [config]);
@@ -74,7 +76,7 @@ function WidgetEmbed(props: {
     initMsg();
   }, [config, initMsg]);
 
-  useRetry(config.id, {
+  useRetry(config.id, config.hostUrl, {
     initMsg: initMsg
   });
 
@@ -97,7 +99,7 @@ function WidgetEmbed(props: {
           border: "1px solid #DCDCDCFF"
         }}
         onLoad={onLoad}
-        src={url}
+        src={src}
         referrerpolicy={"no-referrer"}
         allow={iframePermission}
       />

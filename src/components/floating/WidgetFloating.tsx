@@ -7,10 +7,10 @@ import {iframePermission} from "../../base/const.ts";
 import {defaultPostMsgDelay} from "../../base/const.ts";
 import {defaultFloatingHeight} from "../../base/const.ts";
 import {defaultFloatingWidth} from "../../base/const.ts";
-import {neomeFrameSrc} from "../../base/const.ts";
+import {getSrcOrigin} from "../../base/plus.ts";
 import {useCheckIsMobile} from "../../base/plus.ts";
 import {useRetry} from "../../base/plus.ts";
-import {getUrl} from "../../base/plus.ts";
+import {getWidgetSrc} from "../../base/plus.ts";
 import {getPopUpPosition} from "../../base/plus.ts";
 import {neomeIFrameStyle} from "../../base/styles.ts";
 import {neomeIFrameContainerStyle} from "../../base/styles.ts";
@@ -22,15 +22,15 @@ import {WidgetButton} from "./WidgetButton.tsx";
 export function floating(config: NeomeWidgetFloating)
 {
   const id = config.id;
-  if(id)
+  const hostUrl = config.hostUrl;
+  if(id && hostUrl)
   {
     const neomeWidget = document.getElementById(id);
     if(neomeWidget)
     {
       const style = document.createElement("style");
       style.id = "neomeWidgetStyle";
-      style.innerHTML =
-        `@media only screen and (max-width:500px){#neomeFrameId{height:calc(100vh - 190px);width:calc(100vw - 20px)}}@keyframes opacity-animate{0%{opacity:0}100%{opacity:1}}`;
+      style.innerHTML = `@keyframes opacity-animate{0%{opacity:0}100%{opacity:1}}`;
       const isStyleExist = document.getElementById("neomeWidgetStyle");
       if(!isStyleExist)
       {
@@ -59,7 +59,7 @@ function WidgetFloating(props: {
 })
 {
   const config = props.config;
-  const url = getUrl(config);
+  const src = getWidgetSrc(config);
 
   const [open, setOpen] = useState(false);
   const [badgeCount, setBadgeCount] = useState<number>();
@@ -73,6 +73,7 @@ function WidgetFloating(props: {
 
   const initMsg = useCallback(() =>
   {
+    const origin = getSrcOrigin(config.hostUrl);
     setTimeout(() =>
     {
       if(iframeRef.current)
@@ -80,7 +81,7 @@ function WidgetFloating(props: {
         iframeRef.current.contentWindow?.postMessage({
           type: "init",
           payload: config
-        } as IGetMsgPayload, neomeFrameSrc);
+        } as IGetMsgPayload, origin);
       }
     }, defaultPostMsgDelay);
   }, [config]);
@@ -97,7 +98,7 @@ function WidgetFloating(props: {
     setPopupPosition(popupPosition);
   }, []);
 
-  useRetry(config.id, {
+  useRetry(config.id, config.hostUrl, {
     initMsg: initMsg,
     setBadgeCount: setBadgeCount
   });
@@ -129,7 +130,7 @@ function WidgetFloating(props: {
           ref={iframeRef}
           style={neomeIFrameStyle}
           onLoad={onLoad}
-          src={url}
+          src={src}
           referrerpolicy={"no-referrer"}
           allow={iframePermission}
         />

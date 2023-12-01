@@ -67,7 +67,7 @@ export function WidgetButton(props: {
             justifyContent: "center",
             lineHeight: "20px",
             marginLeft: "4px",
-            minWidth: "20px",
+            minWidth: "15px",
             padding: "0 4px",
             position: "absolute",
             right: "-4px",
