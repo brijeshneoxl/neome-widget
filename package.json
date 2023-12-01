@@ -5,6 +5,10 @@
   "main": "./dist/index.cjs",
   "license": "MIT",
   "module": "./dist/index.js",
+  "keywords": ["neome", "widget", "embed", "chat", "automation"],
+  "repository": "https://github.com/brijeshneoxl/neome-widget",
+  "author": "brijeshdobariya",
+
   "exports": {
     ".": {
       "import": "./dist/index.js",
