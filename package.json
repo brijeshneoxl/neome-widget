@@ -1,13 +1,13 @@
 {
-  "name": "@brijeshdobariya/widget",
-  "version": "0.1.9",
+  "name": "@neomeprealpha/widget",
+  "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.cjs",
   "license": "MIT",
   "module": "./dist/index.js",
   "keywords": ["neome", "widget", "embed", "chat", "automation"],
   "repository": "https://github.com/brijeshneoxl/neome-widget",
-  "author": "brijeshdobariya",
+  "author": "neomeprealpha",
 
   "exports": {
     ".": {

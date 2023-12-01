@@ -35,21 +35,21 @@ function App()
       <LoadEmbed
         config={{
           id: "first",
-          hostUrl: "https://web.neome.ai",
-          showStudio: true,
-          userCredentials: [
-            {
-              handle: "brijesh@neomenta.com",
-              password: "Brijesh@123"
-            }
-          ]
+          hostUrl: "http://localhost:3000",
+          showProduction: true
+          // userCredentials: [
+          //   {
+          //     handle: "brijesh@neomenta.com",
+          //     password: "Brijesh@123"
+          //   }
+          // ]
         }}
       />
 
       <LoadEmbed
         config={{
           id: "second",
-          hostUrl: "https://web.neome.ai",
+          hostUrl: "http://localhost:3000",
           showStudio: true,
           userCredentials: [
             {
@@ -78,7 +78,7 @@ function App()
       {/*  }}*/}
       {/*/>*/}
     </div>
-    
+
     <SimpleDiv />
     <SimpleDiv />
     <SimpleDiv />
@@ -146,8 +146,7 @@ function LoadEmbed(props: {
       <div
         id={props.config.id}
         style={{
-          minWidth: "340px",
-          maxWidth: "360px",
+          minWidth: "940px",
           height: "600px",
           borderRadius: "8px",
           border: "8px solid black",

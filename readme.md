@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/v/@brijeshdobariya/widget.svg" alt="version"></a>
-<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/dw/@brijeshdobariya/widget.svg" alt="downloads"></a>
-<a href="https://www.jsdelivr.com/package/npm/ua-parser-js"><img src="https://data.jsdelivr.com/v1/package/npm/@brijeshdobariya/widget/badge" alt="cdn downloads"></a>
+<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/v/@neomeprealpha/widget.svg" alt="version"></a>
+<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/dw/@neomeprealpha/widget.svg" alt="downloads"></a>
+<a href="https://www.jsdelivr.com/package/npm/ua-parser-js"><img src="https://data.jsdelivr.com/v1/package/npm/@neomeprealpha/widget/badge" alt="cdn downloads"></a>
 </p>
 
 # Neome Widget
@@ -92,16 +92,16 @@ There are two ways of installing :
 
 ## (1) Using package
 
-`yarn add @brijeshdobariya/widget`
+`yarn add @neomeprealpha/widget`
 
 OR
 
-`npm i @brijeshdobariya/widget`
+`npm i @neomeprealpha/widget`
 
 ### Embedding neome in element
 
 ```tsx
-import {embed, NeomeWidgetEmbed} from "@brijeshdobariya/widget";
+import {embed, NeomeWidgetEmbed} from "@neomeprealpha/widget";
 import {useEffect} from "react";
 
 function EmbedNeome()
@@ -147,7 +147,7 @@ function EmbedNeome()
 ### Floating neome in element
 
 ```tsx
-import {floating, NeomeWidgetFloating, IWidgetCredential} from "@brijeshdobariya/widget";
+import {floating, NeomeWidgetFloating, IWidgetCredential} from "@neomeprealpha/widget";
 import {useEffect} from "react";
 
 function FloatingNeome()
@@ -201,7 +201,7 @@ function FloatingNeome()
 ### Embedding deeplink in element
 
 ```tsx
-import {embedDeeplink, NeomeWidgetDeeplink} from "@brijeshdobariya/widget";
+import {embedDeeplink, NeomeWidgetDeeplink} from "@neomeprealpha/widget";
 import {useEffect} from "react";
 
 function EmebdDeeplink()
@@ -242,7 +242,7 @@ function EmebdDeeplink()
 
 ## (2) Using CDN
 
-Add `https://cdn.jsdelivr.net/npm/@brijeshdobariya/widget/dist/cdn.js` in script tag, and you can use all the methods in
+Add `https://cdn.jsdelivr.net/npm/@neomeprealpha/widget/dist/cdn.js` in script tag, and you can use all the methods in
 your project.
 
 ```html
@@ -253,7 +253,7 @@ your project.
 
     <!-- Add CDN script  -->
     <script
-      src="https://cdn.jsdelivr.net/npm/@brijeshdobariya/widget/dist/cdn.js"
+      src="https://cdn.jsdelivr.net/npm/@neomeprealpha/widget/dist/cdn.js"
       type="module"
     >
     </script>
