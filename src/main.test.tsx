@@ -9,6 +9,10 @@ import {NeomeWidgetFloating} from "./index";
 import {NeomeWidgetEmbed} from "./index";
 import {embed} from "./index";
 
+const hostUrl1 = "http://localhost:3000";
+
+// const hostUrl1 = "https://web.neome.ai";
+
 function App()
 {
   return <>
@@ -18,29 +22,24 @@ function App()
     <SimpleDiv />
     <SimpleDiv />
     <div style={{display: "flex", justifyContent: "space-evenly", padding: "50px", flexWrap: "wrap"}}>
-      {/*<LoadEmbed*/}
-      {/*  config={{*/}
-      {/*    id: "first",*/}
-      {/*    hostUrl: "https://web.neome.ai",*/}
-      {/*    showStudio: true*/}
-      {/*    // userCredentials: [*/}
-      {/*    //   {*/}
-      {/*    //     handle: "akash@neoxl.com",*/}
-      {/*    //     password: "Akash987"*/}
-      {/*    //   }*/}
-      {/*    // ]*/}
-      {/*  }}*/}
-      {/*/>*/}
-
       <LoadEmbed
         config={{
           id: "first",
-          hostUrl: "http://localhost:3000",
-          showProduction: true
+          hostUrl: hostUrl1,
+          filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",
+          // selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
+          // demoFlag: true,
+          // allowPersonalChat: true,
+          userCredentials: [
+            {
+              handle: "brijesh@neomenta.com",
+              password: "Brijesh@123"
+            }
+          ]
           // userCredentials: [
           //   {
-          //     handle: "brijesh@neomenta.com",
-          //     password: "Brijesh@123"
+          //     handle: "akash@neoxl.com",
+          //     password: "Akash987"
           //   }
           // ]
         }}
@@ -49,16 +48,56 @@ function App()
       <LoadEmbed
         config={{
           id: "second",
-          hostUrl: "http://localhost:3000",
-          showStudio: true,
+          hostUrl: hostUrl1,
+          allowProduction: true,
+          // demoFlag: true,
+          // filterEntId: "e-vyWHWljcsyux7RImnE20tuONh",
+          // selectGroupId: "g-xEN2Rds8LrcW0u5t12EgMmvt2",
           userCredentials: [
             {
-              handle: "brijesh+1@neomenta.com",
+              handle: "akash@neoxl.com",
+              password: "Akash987"
+            },
+            {
+              handle: "aditya@neoxl.com",
+              password: "Pa$$w0rd"
+            },
+            {
+              handle: "brijesh@neomenta.com",
               password: "Brijesh@123"
+            },
+            {
+              handle: "jason@demo.com",
+              password: "Demo1234"
+            },
+            {
+              handle: "neel@neoxl.com",
+              password: "Neel@123"
+            },
+            {
+              handle: "neomekhushal+1@gmail.com",
+              password: "Test1234"
             }
           ]
         }}
       />
+
+      {/*<LoadEmbed*/}
+      {/*  config={{*/}
+      {/*    id: "third",*/}
+      {/*    hostUrl: hostUrl1,*/}
+      {/*    showStudio: true,*/}
+      {/*    showTerminal: true,*/}
+      {/*    showProduction: true,*/}
+      {/*    showStore: true,*/}
+      {/*    userCredentials: [*/}
+      {/*      {*/}
+      {/*        handle: "aditya@neoxl.com",*/}
+      {/*        password: "Pa$$w0rd"*/}
+      {/*      }*/}
+      {/*    ]*/}
+      {/*  }}*/}
+      {/*/>*/}
 
       {/*<LoadEmbed*/}
       {/*  config={{*/}
@@ -104,7 +143,8 @@ function App()
     <LoadDeeplink
       config={{
         id: "deeplink3",
-        hostUrl: "https://web.orgbeat.com/dl/gh-Usa4Zc8GQhT9SKNvOgLmkx58X"
+        // hostUrl: "https://web.orgbeat.com/dl/gh-Usa4Zc8GQhT9SKNvOgLmkx58X"
+        hostUrl: "http://localhost:3000/dl/gh-2ojl0xNBk3TPlIyclyixzNMGK"
       }}
     />
 
@@ -115,8 +155,18 @@ function App()
     <SimpleDiv />
     <LoadFloating
       config={{
-        id: "third",
-        hostUrl: "https://web.orgbeat.com"
+        id: "floating1",
+        hostUrl: hostUrl1,
+        filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",
+        selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
+        allowPersonalChat: true,
+        demoFlag: true,
+        userCredentials: [
+          {
+            handle: "aditya@neoxl.com",
+            password: "Pa$$w0rd"
+          }
+        ]
       }}
     />
   </>;
@@ -141,12 +191,18 @@ function LoadEmbed(props: {
     }
   }, []);
 
+  useEffect(() =>
+  {
+    neomeRef.current = embed(props.config);
+  }, []);
+
   return (
     <div>
       <div
         id={props.config.id}
         style={{
-          minWidth: "940px",
+          minWidth: "35vw",
+          // minWidth: "350px",
           height: "600px",
           borderRadius: "8px",
           border: "8px solid black",
@@ -217,8 +273,8 @@ function LoadFloating(props: {
     id={props.config.id}
     style={{
       position: "fixed",
-      top: "32px",
-      right: "32px"
+      top: "920px",
+      right: "320px"
     }}
   >
   </div>;
@@ -242,4 +298,3 @@ function SimpleDiv()
 }
 
 render(<App />, document.getElementById("app")!);
-

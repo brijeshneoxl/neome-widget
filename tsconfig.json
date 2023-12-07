@@ -24,7 +24,6 @@
     "checkJs": true,
     "allowJs": true,
     "declaration": true,
-    "declarationMap": true,
     "jsxImportSource": "preact",
 
     // specify the build folder name

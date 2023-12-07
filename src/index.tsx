@@ -20,10 +20,10 @@ export interface NeomeWidget extends IWidget
   demoFlag?: boolean;
   filterEntId?: string;
   selectGroupId?: string;
-  showProduction?: boolean;
-  showStore?: boolean;
-  showStudio?: boolean;
-  showTerminal?: boolean;
+  allowProduction?: boolean;
+  allowStore?: boolean;
+  allowStudio?: boolean;
+  allowTerminal?: boolean;
   userCredentials?: IWidgetCredential[];
 }
 

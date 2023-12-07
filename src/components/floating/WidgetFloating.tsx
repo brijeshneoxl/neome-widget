@@ -86,11 +86,6 @@ function WidgetFloating(props: {
     }, defaultPostMsgDelay);
   }, [config]);
 
-  const onLoad = useCallback(() =>
-  {
-    initMsg();
-  }, [initMsg]);
-
   const onClick = useCallback((open: boolean, menuAnchor: HTMLDivElement) =>
   {
     setOpen(open);
@@ -129,7 +124,6 @@ function WidgetFloating(props: {
         <iframe
           ref={iframeRef}
           style={neomeIFrameStyle}
-          onLoad={onLoad}
           src={src}
           referrerpolicy={"no-referrer"}
           allow={iframePermission}

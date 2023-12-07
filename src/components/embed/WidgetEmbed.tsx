@@ -2,8 +2,8 @@ import {render} from "preact/compat";
 import {useState} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useRef} from "preact/compat";
-import {iframePermission} from "../../base/const.ts";
 import {defaultPostMsgDelay} from "../../base/const.ts";
+import {iframePermission} from "../../base/const.ts";
 import {minWidgetWidth} from "../../base/const.ts";
 import {minWidgetHeight} from "../../base/const.ts";
 import {getSrcOrigin} from "../../base/plus.ts";
@@ -73,7 +73,6 @@ function WidgetEmbed(props: {
   const onLoad = useCallback(() =>
   {
     setIsLoading(false);
-    initMsg();
   }, [config, initMsg]);
 
   useRetry(config.id, config.hostUrl, {

@@ -30,8 +30,7 @@ export default defineConfig({
         }
       },
       formats: ["es", "cjs"]
-    },
-    sourcemap: true
+    }
   },
   plugins: [dts(), preact()]
 });
