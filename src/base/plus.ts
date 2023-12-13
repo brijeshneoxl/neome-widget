@@ -2,13 +2,12 @@ import {CSSProperties} from "preact/compat";
 import {useState} from "react";
 import {useRef} from "react";
 import {useEffect} from "react";
-import {NeomeWidgetDeeplink} from "../index.tsx";
-import {NeomeWidget} from "../index.tsx";
+import {IWidget} from "../index.tsx";
 import {widgetId} from "./const.ts";
 import {retryDurationMs} from "./const.ts";
 import {IPostMsgResponse} from "./types.ts";
 
-export function getWidgetSrc(config: NeomeWidget)
+export function getWidgetSrc(config: IWidget)
 {
   const id = config.id;
   const hostUrl = config.hostUrl;
@@ -22,15 +21,6 @@ export function getWidgetSrc(config: NeomeWidget)
     urlObj.searchParams.set("forceSignIn", "true");
   }
 
-  return urlObj.toString();
-}
-
-export function getDeeplinkSrc(config: NeomeWidgetDeeplink)
-{
-  const id = config.id;
-  const hostUrl = config.hostUrl;
-  const urlObj = new URL(hostUrl);
-  urlObj.searchParams.set(widgetId, id);
   return urlObj.toString();
 }
 

@@ -8,13 +8,13 @@
 <a href="https://www.jsdelivr.com/package/npm/ua-parser-js"><img src="https://data.jsdelivr.com/v1/package/npm/@neomeprealpha/widget/badge" alt="cdn downloads"></a>
 </p>
 
-# Neome Widget
+# Neome virtual assistant
 
 Messaging + Excel + Drive = Accessible and affordable automation.
 
 Neome is a conversational automation platform built for enterprises of any size, from one person to ten thousand.
 
-Neome widget is javascript library which helps you to integrate neome app in your project.
+Neome virtual assistant is javascript library which helps you to integrate neome app in your project.
 
 * Demo      : https://www.orgbeat.com/docs/task-list/try-it
 
@@ -52,45 +52,48 @@ This is main config which is super class of NeomeWidgetEmbed and NeomeWidgetFloa
 
 NeomeWidgetEmbed has same config as NeomeWidget.
 
-| Name              | Value                 | Description                                                                                               |
-|-------------------|-----------------------|-----------------------------------------------------------------------------------------------------------|
-| id (required)     | `string`              | `id` is an id of widget, it must be same of element `id` in which you want to `embed` or `float` the app. |
-| allowPersonalChat | `boolean`             | Filter all enterprise groups in app and only allows personal chat like local groups and normal chats .    |
-| demoFlag          | `boolean`             | Demo flag prevents editing in app.                                                                        |
-| filterEntId       | `string`              | Filter specific enterprise in app.                                                                        |
-| selectGroupId     | `string`              | Preselect group in as the app opens.                                                                      |
-| showProduction    | `boolean`             | Allow to view production in app.                                                                          |
-| showStore         | `boolean`             | Allow to view store in app.                                                                               |
-| showStudio        | `boolean`             | Allow to view studio in app.                                                                              |
-| showTerminal      | `boolean`             | Allow to view terminal in app.                                                                            |
-| userCredentials   | `IWidgetCredential[]` | Array of `IWidgetCredential`, it will select random credentials and will auto sign in in the app          |
+| Name                    | Value                 | Description                                                                                                          |
+|-------------------------|-----------------------|----------------------------------------------------------------------------------------------------------------------|
+| id (required)           | `string`              | `id` is an id of virtual assistant, it must be same of element `id` in which you want to `embed` or `float` the app. |
+| hostUrl (required)      | `string`              | if you have on premise plan then use `url` of your server else use `https://web.neome.ai` .                          |
+| allowPersonalChat       | `boolean`             | Filter all enterprise groups in app and only allows personal chat like local groups and normal chats .               |
+| demoFlag                | `boolean`             | Demo flag prevents editing in app.                                                                                   |
+| filterEntId             | `string`              | Filter specific enterprise in app.                                                                                   |
+| selectGroupId           | `string`              | Preselect group as the app opens.                                                                                    |
+| selectGroupIdBackButton | `boolean`             | Allow to go back if group is pre selected.                                                                           |
+| allowProduction         | `boolean`             | Allow to view production in app.                                                                                     |
+| allowStore              | `boolean`             | Allow to view store in app.                                                                                          |
+| allowStudio             | `boolean`             | Allow to view studio in app.                                                                                         |
+| allowTerminal           | `boolean`             | Allow to view terminal in app.                                                                                       |
+| userCredentials         | `IWidgetCredential[]` | Array of `IWidgetCredential`, it will select random credentials and will auto sign in in the app                     |
 
 ## Config NeomeWidgetFloating
 
-| Name                  | Value     | Description                                                                                               |
-|-----------------------|-----------|-----------------------------------------------------------------------------------------------------------|
-| id (required)         | `string`  | `id` is an id of widget, it must be same of element `id` in which you want to `embed` or `float` the app. |
-| disableBadgeCount     | `boolean` | Disable badge count number in floating button                                                             |
-| floatingButtonIconSrc | `string`  | Choose any image as an icon for floating button.                                                          |
-| widgetHeight          | `number`  | Height of widget popup (default 650).                                                                     |
-| widgetWidth           | `number`  | Width of widget popup (default 350).                                                                      |
+| Name                  | Value     | Description                                                                                                          |
+|-----------------------|-----------|----------------------------------------------------------------------------------------------------------------------|
+| id (required)         | `string`  | `id` is an id of virtual assistant, it must be same of element `id` in which you want to `embed` or `float` the app. |
+| disableBadgeCount     | `boolean` | Disable badge count number in floating button                                                                        |
+| floatingButtonIconSrc | `string`  | Choose any image as an icon for floating button.                                                                     |
+| widgetHeight          | `number`  | Height of virtual assistant popup (default 650).                                                                     |
+| widgetWidth           | `number`  | Width of virtual assistant popup (default 350).                                                                      |
 
 ## Config NeomeWidgetDeeplink
 
-| Name           | Value    | Description                                                                                                   |
-|----------------|----------|---------------------------------------------------------------------------------------------------------------|
-| id (required)  | `string` | `id` is an id of widget, it must be same of element `id` in which you want to `embed` or `float` the app.     |
-| src (required) | `string` | `src` of deeplink you want to embed, it must be same of element `id` in which you want to embed the deeplink. |
+| Name               | Value                 | Description                                                                                                    |
+|--------------------|-----------------------|----------------------------------------------------------------------------------------------------------------|
+| id (required)      | `string`              | `id` is an id of virtual assistant, it must be same of element `id` in which you want to `embed` the deeplink. |
+| hostUrl (required) | `string`              | `url` of deeplink you want to embed.                                                                           |
+| userCredentials    | `IWidgetCredential[]` | Array of `IWidgetCredential`, it will select random credentials and will auto sign in in the app               |
 
 ## Installation
 
-There are two ways of installing :
+There are two ways of neome virtual assistant :
 
-(1) Using package
+(1) Direct react component
 
-(2) Using CDN
+(2) Insert script on your website
 
-## (1) Using package
+## (1) Direct react component
 
 `yarn add @neomeprealpha/widget`
 
@@ -111,9 +114,11 @@ function EmbedNeome()
   {
     const remove = embed({
       id: id,
+      hostUrl: "https://web.neome.ai",
       allowPersonalChat: true,
-      showTerminal: true,
+      allowTerminal: true,
       selectGroupId: "groupId",
+      selectGroupIdBackButton: true,
       filterEntId: "entId"
     } as NeomeWidgetEmbed)
 
@@ -157,7 +162,8 @@ function FloatingNeome()
   {
     const remove = floating({
       id: id,
-      showStudio: true,
+      hostUrl: "https://web.neome.ai",
+      allowStudio: true,
       disableBadgeCount: true,
       widgetWidth: 400,
       widgetHeight: 700,
@@ -180,7 +186,7 @@ function FloatingNeome()
       id={id}
 
       // position element however want to display anywhere in screen
-      // here the widget is positioned to bottom right
+      // here the virtual assistant is positioned to bottom right
       style={{
         position: "fixed",
         bottom: "32px",
@@ -207,13 +213,13 @@ import {useEffect} from "react";
 function EmebdDeeplink()
 {
   const id = "neomeEmbedDeeplink"
-  const src = "src_of_deeplink" // src of deeplink;
+  const hostUrl = "url_of_deeplink" // url of deeplink;
 
   useEffect(() =>
   {
     const remove = embedDeeplink({
       id: id,
-      src: src
+      hostUrl: hostUrl
     } as NeomeWidgetDeeplink)
 
     return () =>
@@ -240,7 +246,7 @@ function EmebdDeeplink()
 */ 
 ```
 
-## (2) Using CDN
+## (2) Insert script on your website
 
 Add `https://cdn.jsdelivr.net/npm/@neomeprealpha/widget/dist/cdn.js` in script tag, and you can use all the methods in
 your project.
@@ -264,7 +270,7 @@ your project.
       embed({
         id: "neomeEmbed",
         allowPersonalChat: true,
-        showTerminal: true,
+        allowTerminal: true,
         selectGroupId: "groupId",
         filterEntId: "entId"
       });

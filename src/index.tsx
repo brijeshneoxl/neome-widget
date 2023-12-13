@@ -8,10 +8,11 @@ export interface IWidgetCredential
   password: string;
 }
 
-interface IWidget
+export interface IWidget
 {
   id: string;
   hostUrl: string;
+  userCredentials?: IWidgetCredential[];
 }
 
 export interface NeomeWidget extends IWidget
@@ -20,11 +21,11 @@ export interface NeomeWidget extends IWidget
   demoFlag?: boolean;
   filterEntId?: string;
   selectGroupId?: string;
+  selectGroupIdBackButton?: boolean;
   allowProduction?: boolean;
   allowStore?: boolean;
   allowStudio?: boolean;
   allowTerminal?: boolean;
-  userCredentials?: IWidgetCredential[];
 }
 
 export interface NeomeWidgetEmbed extends NeomeWidget
@@ -42,6 +43,7 @@ export interface NeomeWidgetFloating extends NeomeWidget
 
 export interface NeomeWidgetDeeplink extends IWidget
 {
+  hideFooter?: boolean;
 }
 
 export {

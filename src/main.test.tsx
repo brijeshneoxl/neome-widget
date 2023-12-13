@@ -27,9 +27,10 @@ function App()
           id: "first",
           hostUrl: hostUrl1,
           filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",
-          // selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
-          // demoFlag: true,
-          // allowPersonalChat: true,
+          selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
+          selectGroupIdBackButton: false,
+          demoFlag: true,
+          allowPersonalChat: true,
           userCredentials: [
             {
               handle: "brijesh@neomenta.com",
@@ -45,42 +46,42 @@ function App()
         }}
       />
 
-      <LoadEmbed
-        config={{
-          id: "second",
-          hostUrl: hostUrl1,
-          allowProduction: true,
-          // demoFlag: true,
-          // filterEntId: "e-vyWHWljcsyux7RImnE20tuONh",
-          // selectGroupId: "g-xEN2Rds8LrcW0u5t12EgMmvt2",
-          userCredentials: [
-            {
-              handle: "akash@neoxl.com",
-              password: "Akash987"
-            },
-            {
-              handle: "aditya@neoxl.com",
-              password: "Pa$$w0rd"
-            },
-            {
-              handle: "brijesh@neomenta.com",
-              password: "Brijesh@123"
-            },
-            {
-              handle: "jason@demo.com",
-              password: "Demo1234"
-            },
-            {
-              handle: "neel@neoxl.com",
-              password: "Neel@123"
-            },
-            {
-              handle: "neomekhushal+1@gmail.com",
-              password: "Test1234"
-            }
-          ]
-        }}
-      />
+      {/*<LoadEmbed*/}
+      {/*  config={{*/}
+      {/*    id: "second",*/}
+      {/*    hostUrl: hostUrl1,*/}
+      {/*    allowProduction: true,*/}
+      {/*    // demoFlag: true,*/}
+      {/*    // filterEntId: "e-vyWHWljcsyux7RImnE20tuONh",*/}
+      {/*    // selectGroupId: "g-xEN2Rds8LrcW0u5t12EgMmvt2",*/}
+      {/*    userCredentials: [*/}
+      {/*      {*/}
+      {/*        handle: "akash@neoxl.com",*/}
+      {/*        password: "Akash987"*/}
+      {/*      },*/}
+      {/*      {*/}
+      {/*        handle: "aditya@neoxl.com",*/}
+      {/*        password: "Pa$$w0rd"*/}
+      {/*      },*/}
+      {/*      {*/}
+      {/*        handle: "brijesh@neomenta.com",*/}
+      {/*        password: "Brijesh@123"*/}
+      {/*      },*/}
+      {/*      {*/}
+      {/*        handle: "jason@demo.com",*/}
+      {/*        password: "Demo1234"*/}
+      {/*      },*/}
+      {/*      {*/}
+      {/*        handle: "neel@neoxl.com",*/}
+      {/*        password: "Neel@123"*/}
+      {/*      },*/}
+      {/*      {*/}
+      {/*        handle: "neomekhushal+1@gmail.com",*/}
+      {/*        password: "Test1234"*/}
+      {/*      }*/}
+      {/*    ]*/}
+      {/*  }}*/}
+      {/*/>*/}
 
       {/*<LoadEmbed*/}
       {/*  config={{*/}
@@ -124,51 +125,70 @@ function App()
     <SimpleDiv />
     <SimpleDiv />
 
-    <div style={{display: "flex", justifyContent: "center", padding: "50px"}}>
+    <div style={{display: "flex", justifyContent: "space-evenly", padding: "50px", flexWrap: "wrap"}}>
       <LoadDeeplink
         config={{
           id: "deeplink1",
-          hostUrl: "https://web.orgbeat.com/dl/gh-BVaYnl17uLJ9MhQUgSlk7SVOC"
+          hostUrl: "http://localhost:3000/preview/gh-wFnrhBB9EbwDMzx7GxSmCJIdE",
+          // userCredentials: [
+          //   {
+          //     handle: "brijesh@neomenta.com",
+          //     password: "Brijesh@123"
+          //   }
+          // ],
+          hideFooter: false
         }}
       />
 
       <LoadDeeplink
         config={{
           id: "deeplink2",
-          hostUrl: "https://web.orgbeat.com/dl/gh-tINh7zO8dr93QCWyVzZLrWJ6R"
+          hostUrl: "http://localhost:3000/preview/gh-tINh7zO8dr93QCWyVzZLrWJ6R",
+          userCredentials: [
+            {
+              handle: "neomekhushal+1@gmail.com",
+              password: "Test1234"
+            }
+          ]
+        }}
+      />
+
+      <LoadDeeplink
+        config={{
+          id: "deeplink3",
+          // hostUrl: "http://localhost:3000/preview/gh-Usa4Zc8GQhT9SKNvOgLmkx58X",
+          hostUrl: "http://localhost:3000/preview/gh-2ojl0xNBk3TPlIyclyixzNMGK",
+          userCredentials: [
+            {
+              handle: "neomekhushal+1@gmail.com",
+              password: "Test1234"
+            }
+          ]
         }}
       />
     </div>
 
-    <LoadDeeplink
-      config={{
-        id: "deeplink3",
-        // hostUrl: "https://web.orgbeat.com/dl/gh-Usa4Zc8GQhT9SKNvOgLmkx58X"
-        hostUrl: "http://localhost:3000/dl/gh-2ojl0xNBk3TPlIyclyixzNMGK"
-      }}
-    />
-
     <SimpleDiv />
     <SimpleDiv />
     <SimpleDiv />
     <SimpleDiv />
     <SimpleDiv />
-    <LoadFloating
-      config={{
-        id: "floating1",
-        hostUrl: hostUrl1,
-        filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",
-        selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
-        allowPersonalChat: true,
-        demoFlag: true,
-        userCredentials: [
-          {
-            handle: "aditya@neoxl.com",
-            password: "Pa$$w0rd"
-          }
-        ]
-      }}
-    />
+    {/*<LoadFloating*/}
+    {/*  config={{*/}
+    {/*    id: "floating1",*/}
+    {/*    hostUrl: hostUrl1,*/}
+    {/*    filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",*/}
+    {/*    selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",*/}
+    {/*    allowPersonalChat: true,*/}
+    {/*    demoFlag: true,*/}
+    {/*    userCredentials: [*/}
+    {/*      {*/}
+    {/*        handle: "aditya@neoxl.com",*/}
+    {/*        password: "Pa$$w0rd"*/}
+    {/*      }*/}
+    {/*    ]*/}
+    {/*  }}*/}
+    {/*/>*/}
   </>;
 }
 
@@ -240,11 +260,12 @@ function LoadDeeplink(props: {
   }, []);
 
   return (
-    <div style={{width: "100%"}}>
+    <div>
       <div
         id={config.id}
         style={{
           height: "600px",
+          width: "70vw",
           borderRadius: "8px",
           border: "8px solid black",
           background: "#d3f0ff",

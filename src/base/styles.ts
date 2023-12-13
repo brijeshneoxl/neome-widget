@@ -5,7 +5,7 @@ const widgetMinWidth = "280px";
 
 export const neomeIFrameContainerStyle = {
   animation: "opacity-animate 0.32s ease-in-out",
-  borderRadius: "8px",
+  borderRadius: "4px",
   boxSizing: "border-box",
   height: "600px",
   minHeight: widgetMinHeight,
@@ -19,7 +19,7 @@ export const neomeIFrameContainerStyle = {
 export const neomeIFrameStyle = {
   backgroundColor: "#fff",
   border: "1px solid #dcdcdcff",
-  borderRadius: "8px",
+  borderRadius: "4px",
   height: "100%",
   width: "100%"
 };
