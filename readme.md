@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/v/@neomeprealpha/widget.svg" alt="version"></a>
-<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/dw/@neomeprealpha/widget.svg" alt="downloads"></a>
-<a href="https://www.jsdelivr.com/package/npm/ua-parser-js"><img src="https://data.jsdelivr.com/v1/package/npm/@neomeprealpha/widget/badge" alt="cdn downloads"></a>
+<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/v/@neome/widget.svg" alt="version"></a>
+<a href="https://www.npmjs.com/package/ua-parser-js"><img src="https://img.shields.io/npm/dw/@neome/widget.svg" alt="downloads"></a>
+<a href="https://www.jsdelivr.com/package/npm/ua-parser-js"><img src="https://data.jsdelivr.com/v1/package/npm/@neome/widget/badge" alt="cdn downloads"></a>
 </p>
 
 # Neome virtual assistant
@@ -16,7 +16,7 @@ Neome is a conversational automation platform built for enterprises of any size,
 
 Neome virtual assistant is javascript library which helps you to integrate neome app in your project.
 
-* Demo      : https://www.orgbeat.com/docs/task-list/try-it
+* Demo      : https://www.neome.ai/docs/task-list/try-it
 
 ***
 
@@ -95,16 +95,16 @@ There are two ways of neome virtual assistant :
 
 ## (1) Direct react component
 
-`yarn add @neomeprealpha/widget`
+`yarn add @neome/widget`
 
 OR
 
-`npm i @neomeprealpha/widget`
+`npm i @neome/widget`
 
 ### Embedding neome in element
 
 ```tsx
-import {embed, NeomeWidgetEmbed} from "@neomeprealpha/widget";
+import {embed, NeomeWidgetEmbed} from "@neome/widget";
 import {useEffect} from "react";
 
 function EmbedNeome()
@@ -152,7 +152,7 @@ function EmbedNeome()
 ### Floating neome in element
 
 ```tsx
-import {floating, NeomeWidgetFloating, IWidgetCredential} from "@neomeprealpha/widget";
+import {floating, NeomeWidgetFloating, IWidgetCredential} from "@neome/widget";
 import {useEffect} from "react";
 
 function FloatingNeome()
@@ -207,7 +207,7 @@ function FloatingNeome()
 ### Embedding deeplink in element
 
 ```tsx
-import {embedDeeplink, NeomeWidgetDeeplink} from "@neomeprealpha/widget";
+import {embedDeeplink, NeomeWidgetDeeplink} from "@neome/widget";
 import {useEffect} from "react";
 
 function EmebdDeeplink()
@@ -248,7 +248,7 @@ function EmebdDeeplink()
 
 ## (2) Insert script on your website
 
-Add `https://cdn.jsdelivr.net/npm/@neomeprealpha/widget/dist/cdn.js` in script tag, and you can use all the methods in
+Add `https://cdn.jsdelivr.net/npm/@neome/widget/dist/cdn.js` in script tag, and you can use all the methods in
 your project.
 
 ```html
@@ -259,7 +259,7 @@ your project.
 
     <!-- Add CDN script  -->
     <script
-      src="https://cdn.jsdelivr.net/npm/@neomeprealpha/widget/dist/cdn.js"
+      src="https://cdn.jsdelivr.net/npm/@neome/widget/dist/cdn.js"
       type="module"
     >
     </script>

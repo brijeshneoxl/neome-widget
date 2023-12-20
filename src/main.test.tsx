@@ -9,9 +9,9 @@ import {NeomeWidgetFloating} from "./index";
 import {NeomeWidgetEmbed} from "./index";
 import {embed} from "./index";
 
-const hostUrl1 = "http://localhost:3000";
-
-// const hostUrl1 = "https://web.neome.ai";
+const local = "http://localhost:3000";
+const orgbeat = "https://web.orgbeat.com";
+const neome = "https://web.neome.ai";
 
 function App()
 {
@@ -22,34 +22,34 @@ function App()
     <SimpleDiv />
     <SimpleDiv />
     <div style={{display: "flex", justifyContent: "space-evenly", padding: "50px", flexWrap: "wrap"}}>
-      <LoadEmbed
-        config={{
-          id: "first",
-          hostUrl: hostUrl1,
-          filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",
-          selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
-          selectGroupIdBackButton: false,
-          demoFlag: true,
-          allowPersonalChat: true,
-          userCredentials: [
-            {
-              handle: "brijesh@neomenta.com",
-              password: "Brijesh@123"
-            }
-          ]
-          // userCredentials: [
-          //   {
-          //     handle: "akash@neoxl.com",
-          //     password: "Akash987"
-          //   }
-          // ]
-        }}
-      />
+      {/*<LoadEmbed*/}
+      {/*  config={{*/}
+      {/*    id: "first",*/}
+      {/*    hostUrl: local,*/}
+      {/*    filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",*/}
+      {/*    // selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",*/}
+      {/*    // selectGroupIdBackButton: true,*/}
+      {/*    allowStudio: true,*/}
+      {/*    allowPersonalChat: true,*/}
+      {/*    userCredentials: [*/}
+      {/*      {*/}
+      {/*        handle: "brijesh@neomenta.com",*/}
+      {/*        password: "Brijesh@123"*/}
+      {/*      }*/}
+      {/*    ]*/}
+      {/*    // userCredentials: [*/}
+      {/*    //   {*/}
+      {/*    //     handle: "akash@neoxl.com",*/}
+      {/*    //     password: "Akash987"*/}
+      {/*    //   }*/}
+      {/*    // ]*/}
+      {/*  }}*/}
+      {/*/>*/}
 
       {/*<LoadEmbed*/}
       {/*  config={{*/}
       {/*    id: "second",*/}
-      {/*    hostUrl: hostUrl1,*/}
+      {/*    hostUrl: local,*/}
       {/*    allowProduction: true,*/}
       {/*    // demoFlag: true,*/}
       {/*    // filterEntId: "e-vyWHWljcsyux7RImnE20tuONh",*/}
@@ -86,7 +86,7 @@ function App()
       {/*<LoadEmbed*/}
       {/*  config={{*/}
       {/*    id: "third",*/}
-      {/*    hostUrl: hostUrl1,*/}
+      {/*    hostUrl: local,*/}
       {/*    showStudio: true,*/}
       {/*    showTerminal: true,*/}
       {/*    showProduction: true,*/}
@@ -129,21 +129,21 @@ function App()
       <LoadDeeplink
         config={{
           id: "deeplink1",
-          hostUrl: "http://localhost:3000/preview/gh-wFnrhBB9EbwDMzx7GxSmCJIdE",
+          hostUrl: local + "/dl/gh-wFnrhBB9EbwDMzx7GxSmCJIdE",
           // userCredentials: [
           //   {
           //     handle: "brijesh@neomenta.com",
           //     password: "Brijesh@123"
           //   }
           // ],
-          hideFooter: false
+          hideFooter: true
         }}
       />
 
       <LoadDeeplink
         config={{
           id: "deeplink2",
-          hostUrl: "http://localhost:3000/preview/gh-tINh7zO8dr93QCWyVzZLrWJ6R",
+          hostUrl: orgbeat + "/dl/gh-tINh7zO8dr93QCWyVzZLrWJ6R",
           userCredentials: [
             {
               handle: "neomekhushal+1@gmail.com",
@@ -156,8 +156,8 @@ function App()
       <LoadDeeplink
         config={{
           id: "deeplink3",
-          // hostUrl: "http://localhost:3000/preview/gh-Usa4Zc8GQhT9SKNvOgLmkx58X",
-          hostUrl: "http://localhost:3000/preview/gh-2ojl0xNBk3TPlIyclyixzNMGK",
+          // hostUrl: orgbeat + "/dl/gh-Usa4Zc8GQhT9SKNvOgLmkx58X",
+          hostUrl: orgbeat + "/dl/gh-2ojl0xNBk3TPlIyclyixzNMGK",
           userCredentials: [
             {
               handle: "neomekhushal+1@gmail.com",
@@ -173,22 +173,23 @@ function App()
     <SimpleDiv />
     <SimpleDiv />
     <SimpleDiv />
-    {/*<LoadFloating*/}
-    {/*  config={{*/}
-    {/*    id: "floating1",*/}
-    {/*    hostUrl: hostUrl1,*/}
-    {/*    filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",*/}
-    {/*    selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",*/}
-    {/*    allowPersonalChat: true,*/}
-    {/*    demoFlag: true,*/}
-    {/*    userCredentials: [*/}
-    {/*      {*/}
-    {/*        handle: "aditya@neoxl.com",*/}
-    {/*        password: "Pa$$w0rd"*/}
-    {/*      }*/}
-    {/*    ]*/}
-    {/*  }}*/}
-    {/*/>*/}
+    <LoadFloating
+      config={{
+        id: "floating1",
+        hostUrl: local,
+        filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",
+        selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
+        selectGroupIdBackButton: true,
+        allowPersonalChat: true,
+        demoFlag: true,
+        userCredentials: [
+          {
+            handle: "aditya@neoxl.com",
+            password: "Pa$$w0rd"
+          }
+        ]
+      }}
+    />
   </>;
 }
 
@@ -294,7 +295,7 @@ function LoadFloating(props: {
     id={props.config.id}
     style={{
       position: "fixed",
-      top: "920px",
+      top: "32px",
       right: "320px"
     }}
   >
