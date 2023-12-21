@@ -1,5 +1,4 @@
 import {render} from "preact/compat";
-import {useState} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useRef} from "react";
 import {defaultPostMsgDelay} from "../../base/const.ts";
@@ -43,7 +42,6 @@ function EmbedDeeplink(props: {
 {
   const config = props.config;
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const src = getWidgetSrc(config);
 
   const initMsg = useCallback(() =>
@@ -61,29 +59,25 @@ function EmbedDeeplink(props: {
     }, defaultPostMsgDelay);
   }, [config]);
 
-  const onLoad = useCallback(() =>
-  {
-    setIsLoading(false);
-  }, []);
-
-  useRetry(config.id, config.hostUrl, {
+  const isConnected = useRetry(config.id, config.hostUrl, {
     initMsg: initMsg
   });
 
   return (
     <>
       {
-        isLoading ? <Loader /> : null
+        !isConnected
+          ? <Loader msg={"Loading..."} />
+          : null
       }
       <iframe
         ref={iframeRef}
         style={{
-          display: isLoading ? "none" : "unset",
+          display: !isConnected ? "none" : "unset",
           width: "100%",
           height: "100%",
           border: "1px solid #DCDCDCFF"
         }}
-        onLoad={onLoad}
         src={src}
         referrerpolicy={"no-referrer"}
         allow={iframePermission}

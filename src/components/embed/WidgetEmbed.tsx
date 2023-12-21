@@ -75,7 +75,7 @@ function WidgetEmbed(props: {
     setIsLoading(false);
   }, [config, initMsg]);
 
-  useRetry(config.id, config.hostUrl, {
+  const isConnected = useRetry(config.id, config.hostUrl, {
     initMsg: initMsg
   });
 
@@ -87,12 +87,14 @@ function WidgetEmbed(props: {
   return (
     <>
       {
-        isLoading ? <Loader /> : null
+        !isConnected
+          ? <Loader msg={"Loading..."} />
+          : null
       }
       <iframe
         ref={iframeRef}
         style={{
-          display: isLoading ? "none" : "unset",
+          display: !isConnected ? "none" : "unset",
           width: "100%",
           height: "100%",
           border: "1px solid #DCDCDCFF"

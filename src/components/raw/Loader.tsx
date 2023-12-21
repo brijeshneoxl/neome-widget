@@ -1,4 +1,6 @@
-export default function Loader()
+export default function Loader(props: {
+  msg?: string
+})
 {
   return (
     <div
@@ -10,10 +12,11 @@ export default function Loader()
         fontFamily: "'.AppleSystemUIFont', 'Arial', 'serif'",
         fontSize: "16px",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        background: "#f5f5f5"
       }}
     >
-      Loading neome...
+      {props.msg || "Loading neome..."}
     </div>
   );
 }

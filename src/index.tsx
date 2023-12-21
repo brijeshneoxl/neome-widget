@@ -13,6 +13,7 @@ export interface IWidget
   id: string;
   hostUrl: string;
   userCredentials?: IWidgetCredential[];
+  signInWithoutCookie?: boolean;
 }
 
 export interface NeomeWidget extends IWidget
