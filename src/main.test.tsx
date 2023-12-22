@@ -13,22 +13,22 @@ const local = "http://localhost:3000";
 const orgbeat = "https://web.orgbeat.com";
 const neome = "https://web.neome.ai";
 
-const url = orgbeat;
+const url = local;
 
 function App()
 {
   return <>
-    <LoadFloating
-      config={{
-        id: "floating1",
-        hostUrl: url,
-        filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",
-        selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
-        selectGroupIdBackButton: true,
-        allowPersonalChat: true,
-        signInWithoutCookie: false
-      }}
-    />
+    {/*<LoadFloating*/}
+    {/*  config={{*/}
+    {/*    id: "floating1",*/}
+    {/*    hostUrl: url,*/}
+    {/*    filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",*/}
+    {/*    selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",*/}
+    {/*    selectGroupIdBackButton: true,*/}
+    {/*    allowPersonalChat: true,*/}
+    {/*    signInWithoutCookie: false*/}
+    {/*  }}*/}
+    {/*/>*/}
 
     <SimpleDiv />
     <SimpleDiv />
@@ -41,10 +41,10 @@ function App()
           id: "first",
           hostUrl: url,
           filterEntId: "e-S85bGsw0sK18S98EJcuKiAke8",
-          // selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
-          // selectGroupIdBackButton: true,
+          selectGroupId: "g-eTaeh1Bsm8Tj6ivhOfDVsi3CS",
+          selectGroupIdBackButton: true,
           allowStudio: true,
-          allowPersonalChat: true,
+          allowPersonalChat: false,
           signInWithoutCookie: true,
           userCredentials: [
             {
