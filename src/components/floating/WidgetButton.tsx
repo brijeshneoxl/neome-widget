@@ -51,37 +51,38 @@ export function WidgetButton(props: {
       }}
     >
       {
-        !disableBadgeCount && badgeCount && !props.open &&
-        <div
-          style={{
-            alignItems: "center",
-            background: "#b3261e",
-            borderRadius: "10px",
-            color: "white",
-            display: "flex",
-            flexWrap: "wrap",
-            fontFamily: "'.AppleSystemUIFont', 'Arial', 'serif'",
-            fontSize: "0.9em",
-            fontWeight: "500",
-            height: "20px",
-            justifyContent: "center",
-            lineHeight: "20px",
-            marginLeft: "4px",
-            minWidth: "15px",
-            padding: "0 4px",
-            position: "absolute",
-            right: "-4px",
-            textAlign: "center",
-            top: "-5px",
-            width: "fit-content"
-          }}
-        >
-          {
-            maxCount && maxCount <= badgeCount
-              ? (maxCount - 1 + "+")
-              : badgeCount
-          }
-        </div>
+        (!disableBadgeCount && badgeCount && !props.open)
+          ? <div
+            style={{
+              alignItems: "center",
+              background: "#b3261e",
+              borderRadius: "10px",
+              color: "white",
+              display: "flex",
+              flexWrap: "wrap",
+              fontFamily: "'.AppleSystemUIFont', 'Arial', 'serif'",
+              fontSize: "0.9em",
+              fontWeight: "500",
+              height: "20px",
+              justifyContent: "center",
+              lineHeight: "20px",
+              marginLeft: "4px",
+              minWidth: "15px",
+              padding: "0 4px",
+              position: "absolute",
+              right: "-4px",
+              textAlign: "center",
+              top: "-5px",
+              width: "fit-content"
+            }}
+          >
+            {
+              maxCount && maxCount <= badgeCount
+                ? (maxCount - 1 + "+")
+                : badgeCount
+            }
+          </div>
+          : null
       }
 
       <RenderIcon

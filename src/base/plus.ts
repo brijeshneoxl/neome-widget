@@ -187,7 +187,7 @@ export function useRetry(widgetId: string, src: string, neomeRef: INeomeRef)
             setIsConnected(false);
             break;
           case "badge":
-            if(response.payload && neomeRef.setBadgeCount)
+            if(response.payload !== undefined && typeof response.payload === "number" && neomeRef.setBadgeCount)
             {
               neomeRef.setBadgeCount(response.payload);
             }
