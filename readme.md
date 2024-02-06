@@ -8,8 +8,8 @@
 <a href="https://www.jsdelivr.com/package/npm/@neome/widget"><img src="https://data.jsdelivr.com/v1/package/npm/@neome/widget/badge" alt="cdn downloads"></a>
 </p>
 
-## Neome virtual assistant
+## Neome widget
 
-Neome virtual assistant is a JavaScript library that helps you integrate the Neome app into your project.
+Neome widget is a JavaScript library that helps you integrate the Neome app into your project.
 
-To know how to use it, follow this documentation: https://www.neome.ai/reference/virtual-assistant
+To know how to use it, follow this documentation: https://www.neome.ai/reference/widget
