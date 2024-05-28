@@ -27,6 +27,7 @@ export interface NeomeWidget extends IWidget
   allowStore?: boolean;
   allowStudio?: boolean;
   allowTerminal?: boolean;
+  allowPushNotifications?: boolean;
 }
 
 export interface NeomeWidgetEmbed extends NeomeWidget
