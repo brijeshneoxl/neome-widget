@@ -11,7 +11,6 @@ export const neomeIFrameContainerStyle = {
   minHeight: widgetMinHeight,
   minWidth: widgetMinWidth,
   position: "fixed",
-  transition: "all 0.3s ease-in-out",
   width: "360px",
   zIndex: "999"
 } as CSSProperties;

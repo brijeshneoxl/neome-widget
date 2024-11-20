@@ -1,3 +1,4 @@
+import {useEffect} from "preact/compat";
 import {useRef} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useState} from "preact/compat";
@@ -67,6 +68,7 @@ function WidgetFloating(props: {
 
   const isMobile = useCheckIsMobile();
 
+  const buttonRef = useRef<HTMLDivElement>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const widgetWidth = config?.widgetWidth || defaultFloatingWidth;
   const widgetHeight = config?.widgetHeight || defaultFloatingHeight;
@@ -98,6 +100,25 @@ function WidgetFloating(props: {
     setBadgeCount: setBadgeCount
   });
 
+  useEffect(() =>
+  {
+    const calcPopupPosition = () =>
+    {
+      if(buttonRef.current)
+      {
+        const popupPosition = getPopUpPosition(widgetWidth, widgetHeight, buttonRef.current);
+        setPopupPosition(popupPosition);
+      }
+    };
+
+    window.addEventListener("resize", calcPopupPosition);
+
+    return () =>
+    {
+      window.removeEventListener("resize", calcPopupPosition);
+    };
+  }, []);
+
   return (
     <>
       <div
@@ -108,19 +129,19 @@ function WidgetFloating(props: {
           width: isMobile ? "calc(100% - 20px)" : widgetWidth,
           height: isMobile ? "calc(100% - 40px)" : widgetHeight,
           ...isMobile && {
-            top: 10,
-            bottom: 10,
-            right: 10,
-            left: 10
+            top: 0,
+            bottom: 0,
+            right: 0,
+            left: 0,
+            margin: "auto"
           }
         }}
       >
         {
           (config?.onOpenHideWidgetButton || isMobile) &&
-          <CrossElement
-            onClick={() => setOpen(false)}
-          />
+          <CrossElement onClick={() => setOpen(false)} />
         }
+
         <iframe
           ref={iframeRef}
           style={neomeIFrameStyle}
@@ -135,6 +156,7 @@ function WidgetFloating(props: {
         config={config}
         onClick={onClick}
         maxCount={100}
+        ref={buttonRef}
         badgeCount={badgeCount}
       />
     </>
@@ -155,7 +177,7 @@ function CrossElement(props: {
       cursor: "pointer",
       userSelect: "none",
       background: "#b3261e",
-      borderTopRightRadius: "8px",
+      borderTopRightRadius: "4px",
       borderBottomLeftRadius: "12px",
       zIndex: 999
     }}
