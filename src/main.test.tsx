@@ -1,7 +1,8 @@
 import {render} from "preact";
+import {memo} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useRef} from "preact/compat";
-import {useEffect} from "preact/compat";
+import {useEffect, useState} from "preact/compat";
 import {NeomeWidgetDeeplink} from "./index";
 import {floating} from "./index";
 import {embedDeeplink} from "./index";
@@ -13,7 +14,7 @@ const local = "http://localhost:3000";
 const orgbeat = "https://web.orgbeat.com";
 const neome = "https://web.neome.ai";
 
-const url = local;
+const url = orgbeat;
 
 function App()
 {
@@ -164,6 +165,95 @@ function App()
   </>;
 }
 
+function LoadEmbedDirects()
+{
+  const [ids, setIds] = useState<string[]>(["1", "2", "3"]);
+
+  const shuffle = useCallback(() =>
+  {
+    const shuffled = [...ids];
+    for(let i = shuffled.length - 1; i > 0; i--)
+    {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    setIds(shuffled);
+  }, [ids]);
+
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          gap: "16px",
+          padding: "16px"
+        }}
+      >
+        {
+          ids.map((id: string) =>
+          {
+            return <LoadEmbedDirect
+              id={id}
+              key={id}
+            />;
+          })
+        }
+      </div>
+      <button onClick={shuffle}>Shuffle</button>
+    </div>
+  );
+}
+
+const LoadEmbedDirect = memo((props: {
+  id: string
+}) =>
+{
+  useEffect(() =>
+  {
+    embed({
+      id: props.id,
+      hostUrl: orgbeat,
+      signInWithoutCookie: true,
+      userCredentials: [
+        {
+          handle: "akash@neoxl.com",
+          password: "Akash987"
+        },
+        {
+          handle: "aditya@neomenta.com",
+          password: "Aditya123"
+        },
+        {
+          handle: "brijesh@neomenta.com",
+          password: "Brijesh@123"
+        },
+        {
+          handle: "jason@demo.com",
+          password: "Demo1234"
+        },
+        {
+          handle: "neel@neoxl.com",
+          password: "Neel@123"
+        }
+      ]
+    });
+  }, []);
+
+  return (
+    <div
+      id={props.id}
+      style={{
+        width: "350px",
+        height: "600px",
+        borderRadius: "8px",
+        border: "8px solid black",
+        background: "#d3f0ff",
+        margin: "10px 0"
+      }}
+    />
+  );
+});
+
 function LoadEmbed(props: {
   config: NeomeWidgetEmbed
 })
@@ -267,7 +357,7 @@ function LoadFloating(props: {
     style={{
       position: "fixed",
       bottom: "32px",
-      left: "32px"
+      right: "32px"
     }}
   >
   </div>;

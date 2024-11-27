@@ -1,5 +1,4 @@
 import {render} from "preact/compat";
-import {useState} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useRef} from "preact/compat";
 import {defaultPostMsgDelay} from "../../base/const.ts";
@@ -52,7 +51,6 @@ function WidgetEmbed(props: {
 {
   const config = props.config;
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [isLoading, setIsLoading] = useState(true);
   const src = getWidgetSrc(config);
 
   const initMsg = useCallback(() =>
@@ -69,11 +67,6 @@ function WidgetEmbed(props: {
       }
     }, defaultPostMsgDelay);
   }, [config]);
-
-  const onLoad = useCallback(() =>
-  {
-    setIsLoading(false);
-  }, [config, initMsg]);
 
   const isConnected = useRetry(config.id, config.hostUrl, {
     initMsg: initMsg
@@ -99,7 +92,6 @@ function WidgetEmbed(props: {
           height: "100%",
           border: "1px solid #DCDCDCFF"
         }}
-        onLoad={onLoad}
         src={src}
         referrerpolicy={"no-referrer"}
         allow={iframePermission}

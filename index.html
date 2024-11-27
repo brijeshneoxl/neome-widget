@@ -19,13 +19,15 @@
     <style>
       *
       {
-        font-family: ".AppleSystemUIFont"
+        font-family: ".AppleSystemUIFont";
+        margin: 0;
+        padding: 0;
       }
 
       body
       {
         height: 100vh;
-        width: 100vw;
+        width: 100%;
       }
 
       #floating
@@ -40,14 +42,17 @@
         margin-bottom: 16px;
       }
     </style>
-    <script type="text/javascript">
+    <script type="module">
       let remove = () =>
       {
       };
 
       let loadWidget = () =>
       {
-        Neome.print();
+        embed({
+          id: "floating1",
+          hostUrl: "https://web.neome.ai"
+        });
       };
     </script>
   </head>

@@ -1,8 +1,6 @@
-import {useEffect} from "preact/compat";
 import {useRef} from "preact/compat";
 import {useCallback} from "preact/compat";
 import {useState} from "preact/compat";
-import {CSSProperties} from "react";
 import {render} from "react";
 import {iframePermission} from "../../base/const.ts";
 import {defaultPostMsgDelay} from "../../base/const.ts";
@@ -12,7 +10,8 @@ import {getSrcOrigin} from "../../base/plus.ts";
 import {useCheckIsMobile} from "../../base/plus.ts";
 import {useRetry} from "../../base/plus.ts";
 import {getWidgetSrc} from "../../base/plus.ts";
-import {getPopUpPosition} from "../../base/plus.ts";
+import {getStyleWidgetDirection} from "../../base/plus.ts";
+import {neomeIFrameContainerStyleMobile} from "../../base/styles.ts";
 import {neomeIFrameStyle} from "../../base/styles.ts";
 import {neomeIFrameContainerStyle} from "../../base/styles.ts";
 import {IGetMsgPayload} from "../../base/types.ts";
@@ -64,7 +63,6 @@ function WidgetFloating(props: {
 
   const [open, setOpen] = useState(false);
   const [badgeCount, setBadgeCount] = useState<number>();
-  const [popupPosition, setPopupPosition] = useState<CSSProperties>();
 
   const isMobile = useCheckIsMobile();
 
@@ -72,6 +70,8 @@ function WidgetFloating(props: {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const widgetWidth = config?.widgetWidth || defaultFloatingWidth;
   const widgetHeight = config?.widgetHeight || defaultFloatingHeight;
+  const direction = config?.direction || "topLeft";
+  const styleWidgetDirection = getStyleWidgetDirection(direction);
 
   const initMsg = useCallback(() =>
   {
@@ -88,53 +88,32 @@ function WidgetFloating(props: {
     }, defaultPostMsgDelay);
   }, [config]);
 
-  const onClick = useCallback((open: boolean, menuAnchor: HTMLDivElement) =>
+  const onClick = useCallback((open: boolean) =>
   {
     setOpen(open);
-    const popupPosition = getPopUpPosition(widgetWidth, widgetHeight, menuAnchor);
-    setPopupPosition(popupPosition);
-  }, []);
+  }, [direction]);
 
   useRetry(config.id, config.hostUrl, {
     initMsg: initMsg,
     setBadgeCount: setBadgeCount
   });
 
-  useEffect(() =>
-  {
-    const calcPopupPosition = () =>
-    {
-      if(buttonRef.current)
-      {
-        const popupPosition = getPopUpPosition(widgetWidth, widgetHeight, buttonRef.current);
-        setPopupPosition(popupPosition);
-      }
-    };
-
-    window.addEventListener("resize", calcPopupPosition);
-
-    return () =>
-    {
-      window.removeEventListener("resize", calcPopupPosition);
-    };
-  }, []);
-
   return (
-    <>
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100%"
+      }}
+    >
       <div
         style={{
           ...neomeIFrameContainerStyle,
-          ...popupPosition,
+          ...styleWidgetDirection,
           display: open ? "unset" : "none",
-          width: isMobile ? "calc(100% - 20px)" : widgetWidth,
-          height: isMobile ? "calc(100% - 40px)" : widgetHeight,
-          ...isMobile && {
-            top: 0,
-            bottom: 0,
-            right: 0,
-            left: 0,
-            margin: "auto"
-          }
+          width: widgetWidth,
+          height: widgetHeight,
+          ...isMobile && neomeIFrameContainerStyleMobile
         }}
       >
         {
@@ -159,7 +138,7 @@ function WidgetFloating(props: {
         ref={buttonRef}
         badgeCount={badgeCount}
       />
-    </>
+    </div>
   );
 }
 
@@ -170,7 +149,7 @@ function CrossElement(props: {
   return <div
     style={{
       position: "absolute",
-      top: 0,
+      top: 1,
       right: -1,
       color: "white",
       fontWeight: "bold",

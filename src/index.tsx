@@ -8,6 +8,12 @@ export interface IWidgetCredential
   password: string;
 }
 
+export type TypeWidgetDirection =
+  | "topLeft"
+  | "topRight"
+  | "bottomLeft"
+  | "bottomRight";
+
 export interface IWidget
 {
   id: string;
@@ -41,6 +47,7 @@ export interface NeomeWidgetFloating extends NeomeWidget
   onOpenHideWidgetButton?: boolean;
   widgetHeight?: number;
   widgetWidth?: number;
+  direction?: TypeWidgetDirection;
 }
 
 export interface NeomeWidgetDeeplink extends IWidget
