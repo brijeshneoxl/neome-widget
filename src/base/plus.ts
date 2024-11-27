@@ -31,22 +31,22 @@ export function getStyleWidgetDirection(direction: TypeWidgetDirection)
   switch(direction)
   {
     case "topLeft":
-      position.bottom = 72;
+      position.bottom = 66;
       position.right = 2;
       position.boxShadow = "-5px -5px 10px -10px rgba(0, 0, 0, 0.3)";
       break;
     case "topRight":
-      position.bottom = 72;
+      position.bottom = 66;
       position.left = 0;
       position.boxShadow = "5px -5px 10px -10px rgba(0, 0, 0, 0.3)";
       break;
     case "bottomLeft":
-      position.top = 72;
+      position.top = 64;
       position.right = 2;
       position.boxShadow = "-5px 5px 10px -10px rgba(0, 0, 0, 0.3)";
       break;
     case "bottomRight":
-      position.top = 72;
+      position.top = 64;
       position.left = 0;
       position.boxShadow = "5px 5px 10px -10px rgba(0, 0, 0, 0.3)";
       break;
