@@ -1,3 +1,4 @@
+import {useCallback} from "preact/compat";
 import {CSSProperties} from "preact/compat";
 import {useState} from "react";
 import {useRef} from "react";
@@ -67,6 +68,16 @@ export function useRetry(widgetId: string, src: string, neomeRef: INeomeRef)
   const timeOutId = useRef<NodeJS.Timeout>();
   const origin = getSrcOrigin(src);
 
+  const reloadWidget = useCallback(() =>
+  {
+    const widget = document.getElementById(widgetId)?.getElementsByTagName("iframe").item(0);
+    if(widget)
+    {
+      widget.contentWindow?.location.replace(widget.src);
+      setIsConnected(false);
+    }
+  }, [widgetId]);
+
   useEffect(() =>
   {
     if(!isConnected)
@@ -74,6 +85,7 @@ export function useRetry(widgetId: string, src: string, neomeRef: INeomeRef)
       timeOutId.current = setInterval(() =>
       {
         neomeRef.initMsg();
+        logInfo(widgetId, "is trying to connect...");
       }, retryDurationMs);
     }
     else if(timeOutId.current)
@@ -103,10 +115,12 @@ export function useRetry(widgetId: string, src: string, neomeRef: INeomeRef)
             if(widgetId === response.payload)
             {
               setIsConnected(true);
+              logInfo(widgetId, "connected");
             }
             break;
           case "disconnected":
             setIsConnected(false);
+            logInfo(widgetId, "disconnected");
             break;
           case "badge":
             if(response.payload !== undefined && typeof response.payload === "number" && neomeRef.setBadgeCount)
@@ -116,6 +130,10 @@ export function useRetry(widgetId: string, src: string, neomeRef: INeomeRef)
             break;
           case "getConfig":
             neomeRef.initMsg();
+            break;
+          case "reload":
+            reloadWidget();
+            break;
         }
       }
     };
@@ -154,4 +172,10 @@ export function getSrcOrigin(src: string)
 {
   const urlObj = new URL(src);
   return urlObj.origin;
+}
+
+export function logInfo(widgetId: string, message: string)
+{
+  const logText = `${new Date().toLocaleString()} | ${widgetId}: ${message}`;
+  console.log(`%c${logText}`, `color: #00bcd4`);
 }

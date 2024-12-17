@@ -1,6 +1,7 @@
 type IPostMsgType =
   | "connected"
   | "getConfig"
+  | "reload"
   | "disconnected"
   | "badge";
 
