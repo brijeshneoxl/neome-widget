@@ -14,7 +14,7 @@ const local = "http://localhost:3000";
 const orgbeat = "https://web.orgbeat.com";
 const neome = "https://web.neome.ai";
 
-const url = orgbeat;
+const url = neome;
 
 function App()
 {
@@ -61,7 +61,7 @@ function App()
         config={{
           id: "second",
           hostUrl: url,
-          allowProduction: true,
+          allowAdminPanel: true,
           signInWithoutCookie: true,
           // demoFlag: true,
           // filterEntId: "e-vyWHWljcsyux7RImnE20tuONh",

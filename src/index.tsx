@@ -29,7 +29,7 @@ export interface NeomeWidget extends IWidget
   filterEntId?: string;
   selectGroupId?: string;
   selectGroupIdBackButton?: boolean;
-  allowProduction?: boolean;
+  allowAdminPanel?: boolean;
   allowStore?: boolean;
   allowStudio?: boolean;
   allowTerminal?: boolean;
